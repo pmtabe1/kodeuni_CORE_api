@@ -1,0 +1,32 @@
+<Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Body>
+		<Response xmlns:api="http://soapdummies.com/products/response">
+			<Solution>
+				Standard/MultiProduct
+			</Solution>
+			<RequestID>
+				baff2531-1959-42b0-947a-807b77a87814
+			</RequestID>
+			<Body>
+				<Status>
+					100
+				</Status>
+				<Salary>
+					1
+				</Salary>
+				<Designation>
+					A1
+				</Designation>
+				<Manager>
+					122960618779897
+				</Manager>
+				<Company>
+					2019–07–09T07:31:03
+				</Company>
+				<EmployedSince>
+					500
+				</EmployedSince>
+			</Body>
+		</Response>
+	</Body>
+</Envelope>

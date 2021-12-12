@@ -1,0 +1,2990 @@
+basePath: /api/v1
+definitions:
+  bank_callbacks_dto.BankRequestsRequestPayload:
+    properties:
+      StatusCode:
+        type: integer
+      StatusDescription:
+        type: string
+      Transaction:
+        properties:
+          Amount:
+            type: number
+          BankName:
+            type: string
+          BankReference:
+            type: string
+          ChannelReference:
+            type: string
+          Msisdn:
+            type: string
+          PaymentMethod:
+            type: string
+          StatusDescription:
+            type: string
+          Timestamp:
+            type: integer
+          TransactionReference:
+            type: string
+          TransactionType:
+            type: string
+        type: object
+    type: object
+  bank_callbacks_dto.BankRequestsResponsePayload:
+    properties:
+      StatusCode:
+        type: integer
+      StatusDescription:
+        type: string
+      Transaction:
+        properties:
+          Amount:
+            type: number
+          BankName:
+            type: string
+          BankReference:
+            type: string
+          ChannelReference:
+            type: string
+          Msisdn:
+            type: string
+          PaymentMethod:
+            type: string
+          StatusDescription:
+            type: string
+          Timestamp:
+            type: integer
+          TransactionReference:
+            type: string
+          TransactionType:
+            type: string
+        type: object
+    type: object
+  bank_fineract_models.Admin:
+    properties:
+      id:
+        example: 1
+        type: integer
+      name:
+        example: admin name
+        type: string
+    type: object
+  bank_fineract_models.Channel:
+    properties:
+      approver:
+        type: string
+      attachment:
+        items:
+          type: integer
+        type: array
+      auditedOn:
+        type: string
+      barcode:
+        items:
+          type: integer
+        type: array
+      checker:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      deletedOn:
+        type: string
+      description:
+        type: string
+      destination:
+        type: string
+      enabled:
+        type: integer
+      id:
+        type: integer
+      locale:
+        type: string
+      maker:
+        type: string
+      name:
+        type: string
+      qrcode:
+        items:
+          type: integer
+        type: array
+      source:
+        type: string
+      stage:
+        type: string
+      status:
+        type: string
+      syncToken:
+        type: integer
+      transactionType:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+      version:
+        type: integer
+      workflowLevels:
+        type: integer
+    type: object
+  bank_fineract_models.ErrorResponse:
+    properties:
+      errorMessage:
+        type: string
+      errorStackTrace:
+        type: string
+      errorStatusCode:
+        type: integer
+    type: object
+  bank_fineract_models.Login:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  bank_fineract_models.Payment:
+    properties:
+      accountNumber:
+        type: string
+      accountRef:
+        type: string
+      amount:
+        type: number
+      approver:
+        type: string
+      attachment:
+        items:
+          type: integer
+        type: array
+      auditedOn:
+        type: string
+      bankReference:
+        type: string
+      barcode:
+        items:
+          type: integer
+        type: array
+      channelReference:
+        type: string
+      channelRequestType:
+        type: string
+      checker:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      deletedOn:
+        type: string
+      description:
+        type: string
+      enabled:
+        type: integer
+      id:
+        type: integer
+      locale:
+        type: string
+      maker:
+        type: string
+      msisdn:
+        type: string
+      name:
+        type: string
+      paymentNumber:
+        type: integer
+      qrcode:
+        items:
+          type: integer
+        type: array
+      stage:
+        type: string
+      state:
+        type: string
+      status:
+        type: string
+      syncToken:
+        type: integer
+      timestamp:
+        type: integer
+      transactionReference:
+        type: string
+      transactionType:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+      version:
+        type: integer
+      workflowLevels:
+        type: integer
+    type: object
+  bank_fineract_models.Signup:
+    properties:
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      mobile:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  bank_fineract_models.TransactionHist:
+    properties:
+      accountNumber:
+        type: string
+      accountRef:
+        type: string
+      amount:
+        type: number
+      approver:
+        type: string
+      attachment:
+        items:
+          type: integer
+        type: array
+      auditedOn:
+        type: string
+      bankReference:
+        type: string
+      barcode:
+        items:
+          type: integer
+        type: array
+      channelReference:
+        type: string
+      channelRequestType:
+        type: string
+      checker:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      deletedOn:
+        type: string
+      description:
+        type: string
+      enabled:
+        type: integer
+      id:
+        type: integer
+      locale:
+        type: string
+      maker:
+        type: string
+      msisdn:
+        type: string
+      name:
+        type: string
+      paymentNumber:
+        type: integer
+      qrcode:
+        items:
+          type: integer
+        type: array
+      stage:
+        type: string
+      state:
+        type: string
+      status:
+        type: string
+      syncToken:
+        type: integer
+      timestamp:
+        type: integer
+      transactionReference:
+        type: string
+      transactionType:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+      version:
+        type: integer
+      workflowLevels:
+        type: integer
+    type: object
+  bank_fineract_models.TransactionLog:
+    properties:
+      accountNumber:
+        type: string
+      accountRef:
+        type: string
+      amount:
+        type: number
+      approver:
+        type: string
+      attachment:
+        items:
+          type: integer
+        type: array
+      auditedOn:
+        type: string
+      bankReference:
+        type: string
+      barcode:
+        items:
+          type: integer
+        type: array
+      channelReference:
+        type: string
+      channelRequestType:
+        type: string
+      checker:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      deletedOn:
+        type: string
+      description:
+        type: string
+      enabled:
+        type: integer
+      id:
+        type: integer
+      locale:
+        type: string
+      maker:
+        type: string
+      msisdn:
+        type: string
+      name:
+        type: string
+      paymentNumber:
+        type: integer
+      qrcode:
+        items:
+          type: integer
+        type: array
+      stage:
+        type: string
+      state:
+        type: string
+      status:
+        type: string
+      syncToken:
+        type: integer
+      timestamp:
+        type: integer
+      transactionReference:
+        type: string
+      transactionType:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+      version:
+        type: integer
+      workflowLevels:
+        type: integer
+    type: object
+  bank_fineract_models.User:
+    properties:
+      approver:
+        type: string
+      attachment:
+        items:
+          type: integer
+        type: array
+      auditedOn:
+        type: string
+      barcode:
+        items:
+          type: integer
+        type: array
+      checker:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      deletedOn:
+        type: string
+      description:
+        type: string
+      deviceToken:
+        type: string
+      email:
+        type: string
+      enabled:
+        type: integer
+      firstname:
+        type: string
+      hookPayload:
+        type: string
+      id:
+        type: integer
+      lastname:
+        type: string
+      locale:
+        type: string
+      maker:
+        type: string
+      mobile:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      qrcode:
+        items:
+          type: integer
+        type: array
+      stage:
+        type: string
+      status:
+        type: string
+      syncToken:
+        type: integer
+      transactionType:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+      username:
+        type: string
+      version:
+        type: integer
+      workflowLevels:
+        type: integer
+    type: object
+  bank_requests_dto.BankRequestsRequestPayload:
+    properties:
+      StatusCode:
+        type: integer
+      StatusDescription:
+        type: string
+      Transaction:
+        properties:
+          Amount:
+            type: number
+          BankName:
+            type: string
+          BankReference:
+            type: string
+          ChannelReference:
+            type: string
+          Msisdn:
+            type: string
+          PaymentMethod:
+            type: string
+          Status:
+            type: string
+          StatusDescription:
+            type: string
+          Timestamp:
+            type: integer
+          TransactionReference:
+            type: string
+          TransactionType:
+            type: string
+        type: object
+    type: object
+  bank_requests_dto.BankRequestsResponsePayload:
+    properties:
+      StatusCode:
+        type: integer
+      StatusDescription:
+        type: string
+      Transaction:
+        properties:
+          Amount:
+            type: number
+          BankName:
+            type: string
+          BankReference:
+            type: string
+          ChannelReference:
+            type: string
+          Msisdn:
+            type: string
+          PaymentMethod:
+            type: string
+          StatusDescription:
+            type: string
+          Timestamp:
+            type: integer
+          TransactionReference:
+            type: string
+          TransactionType:
+            type: string
+        type: object
+    type: object
+  channel_requests_dto.ChannelRequestsRequestPayload:
+    properties:
+      amount:
+        type: number
+      clientId:
+        type: integer
+      clientRequestChannel:
+        type: string
+      description:
+        type: string
+      fromAccountId:
+        type: integer
+      fromAccountNumber:
+        type: string
+      paymentChannel:
+        type: string
+      tenantId:
+        type: string
+      transactionType:
+        type: string
+    type: object
+  channel_requests_dto.ChannelRequestsResponsePayload:
+    properties:
+      AccountNumber:
+        type: string
+      Action:
+        type: string
+      Amount:
+        type: integer
+      BankReference:
+        type: string
+      ChannelReference:
+        type: string
+      ChannelRequestType:
+        type: string
+      ClientID:
+        type: string
+      Description:
+        type: string
+      Msisdn:
+        type: string
+      Status:
+        type: string
+      StatusCode:
+        type: string
+      TenantID:
+        type: string
+      Timestamp:
+        type: string
+      TransactionReference:
+        type: string
+      TransactionType:
+        type: string
+    type: object
+  error_models.ErrorResponse:
+    properties:
+      errorMessage:
+        type: string
+      errorStackTrace:
+        type: string
+      errorStatusCode:
+        type: integer
+    type: object
+  fineract_hookevents_dto.FineractHookEventHttpBodyRequestPayload:
+    properties:
+      actionName:
+        type: string
+      clientId:
+        type: integer
+      createdBy:
+        type: integer
+      createdByFullName:
+        type: string
+      createdByName:
+        type: string
+      entityName:
+        type: string
+      officeId:
+        type: integer
+      request:
+        properties:
+          dateFormat:
+            type: string
+          locale:
+            type: string
+          paymentTypeId:
+            type: number
+          transactionAmount:
+            type: string
+          transactionDate:
+            type: string
+        type: object
+      response:
+        properties:
+          changes:
+            type: object
+          clientId:
+            type: integer
+          resourceId:
+            type: integer
+          savingsId:
+            type: integer
+        type: object
+      timestamp:
+        type: string
+    type: object
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+host: localhost:9001
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a finaract middleware API  documentation .
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Fineract Middleware API
+  version: "1.0"
+paths:
+  /middleware/api/v1/bankCallbacks:
+    post:
+      consumes:
+      - application/json
+      description: Adding Payment through BankRequestsRequestPayload
+      parameters:
+      - description: PaymentFulfillment
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_callbacks_dto.BankRequestsRequestPayload'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_callbacks_dto.BankRequestsResponsePayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Process Payment fulfilment  of an earlier posted existing transaction
+        with Action option of either of DEPOSIT/WITHDRAWAL/TRANSFER
+      tags:
+      - PaymentFulfillment
+  /middleware/api/v1/bankSimulations:
+    post:
+      consumes:
+      - application/json
+      description: initiate new Payment transaction request with Actions as WITHDRAWAL,DEPOSIT,TRANSFER
+      parameters:
+      - description: BankIncommingPaymentRequest
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_requests_dto.BankRequestsRequestPayload'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_requests_dto.BankRequestsResponsePayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Add an BankIncommingPaymentRequest
+      tags:
+      - BankIncommingPaymentRequest
+  /middleware/api/v1/channel/add:
+    post:
+      consumes:
+      - application/json
+      description: Adding Channel
+      parameters:
+      - description: Channel
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.Channel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Channel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Add an Channel
+      tags:
+      - Channel
+  /middleware/api/v1/channel/all:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all Channels
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Channel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve all Channels
+      tags:
+      - Channel
+  /middleware/api/v1/channel/date/{date}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Channels by date
+      parameters:
+      - description: Channel Date
+        in: path
+        name: date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Channel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Channels by date
+      tags:
+      - Channel
+  /middleware/api/v1/channel/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Channel by id
+      operationId: delete-Channel-by-int
+      parameters:
+      - description: Channel ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Channel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Delete Channel by id
+      tags:
+      - Channel
+  /middleware/api/v1/channel/enabled/{enabled}:
+    get:
+      consumes:
+      - application/json
+      description: Retrive Channels by Stage
+      parameters:
+      - description: Channel Enabled
+        in: path
+        name: Enabled
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Channel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Channels by enabled status
+      tags:
+      - Channel
+  /middleware/api/v1/channel/id/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Channel by by ChannelID
+      operationId: Retrieve Channel by ID
+      parameters:
+      - description: Channel ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Channel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Channel by ChannelID
+      tags:
+      - Channel
+  /middleware/api/v1/channel/locale/{locale}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Locale
+      parameters:
+      - description: Channel Locale
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Channel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Channels by Locale
+      tags:
+      - Channel
+  /middleware/api/v1/channel/owner/{owner}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Channels by owner
+      parameters:
+      - description: Channel Owner
+        in: path
+        name: owner
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Channel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Channels by owner
+      tags:
+      - Channel
+  /middleware/api/v1/channel/stage/{stage}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Channels by Stage
+      parameters:
+      - description: Channel Stage
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Channel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve  Channels by Stage
+      tags:
+      - Channel
+  /middleware/api/v1/channel/type/{type}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Stage
+      parameters:
+      - description: Channel Type
+        in: path
+        name: type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Channel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Get Channels by Type
+      tags:
+      - Channel
+  /middleware/api/v1/channel/update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: update-Channel-by-id-int
+      parameters:
+      - description: Channel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Channel
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.Channel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Channel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Update an Channel
+      tags:
+      - Channel
+  /middleware/api/v1/channelsRequests:
+    post:
+      consumes:
+      - application/json
+      description: Adding Payment
+      parameters:
+      - description: ChannelRequestsPayment
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/channel_requests_dto.ChannelRequestsRequestPayload'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/channel_requests_dto.ChannelRequestsResponsePayload'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: initiates payment flow by initiating ChannelRequestsPayment
+      tags:
+      - ChannelRequestsPayment
+  /middleware/api/v1/eventHooks:
+    post:
+      consumes:
+      - application/json
+      description: Adding Payment
+      parameters:
+      - description: FineractHookPaymentEvent
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/fineract_hookevents_dto.FineractHookEventHttpBodyRequestPayload'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Payment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: runing event FineractHookPaymentEvent
+      tags:
+      - FineractHookPaymentEvent
+  /middleware/api/v1/login:
+    post:
+      consumes:
+      - application/json
+      description: Adding Signup
+      parameters:
+      - description: Login
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.Login'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Signup'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error_models.ErrorResponse'
+      summary: Add an Signup
+      tags:
+      - Auth
+  /middleware/api/v1/payment/add:
+    post:
+      consumes:
+      - application/json
+      description: Adding Payment
+      parameters:
+      - description: Payment
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.Payment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Payment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Add an Payment
+      tags:
+      - Payment
+  /middleware/api/v1/payment/all:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all Payments
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Payment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve all Payments
+      tags:
+      - Payment
+  /middleware/api/v1/payment/date/{date}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Payments by date
+      parameters:
+      - description: Payment Date
+        in: path
+        name: date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Payment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Payments by date
+      tags:
+      - Payment
+  /middleware/api/v1/payment/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Payment by id
+      operationId: delete payment-by-id-int
+      parameters:
+      - description: Payment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Payment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Delete Payment by id
+      tags:
+      - Payment
+  /middleware/api/v1/payment/enabled/{enabled}:
+    get:
+      consumes:
+      - application/json
+      description: Retrive Payments by Stage
+      parameters:
+      - description: Payment Enabled
+        in: path
+        name: Enabled
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Payment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Payments by enabled status
+      tags:
+      - Payment
+  /middleware/api/v1/payment/id/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Payment by by PaymentID
+      operationId: Retrieve Payment by ID
+      parameters:
+      - description: Payment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Payment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Payment by PaymentID
+      tags:
+      - Payment
+  /middleware/api/v1/payment/locale/{locale}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Locale
+      parameters:
+      - description: Payment Locale
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Payment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Payments by Locale
+      tags:
+      - Payment
+  /middleware/api/v1/payment/owner/{owner}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Payments by owner
+      parameters:
+      - description: Payment Owner
+        in: path
+        name: owner
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Payment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Payments by owner
+      tags:
+      - Payment
+  /middleware/api/v1/payment/stage/{stage}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Payments by Stage
+      parameters:
+      - description: Payment Stage
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Payment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve  Payments by Stage
+      tags:
+      - Payment
+  /middleware/api/v1/payment/type/{type}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Stage
+      parameters:
+      - description: Payment Type
+        in: path
+        name: type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.Payment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Get Payments by Type
+      tags:
+      - Payment
+  /middleware/api/v1/payment/update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: update-payment-by-id-int
+      parameters:
+      - description: Payment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Payment
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.Payment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Payment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Update an Payment
+      tags:
+      - Payment
+  /middleware/api/v1/signup:
+    post:
+      consumes:
+      - application/json
+      description: Adding Signup
+      parameters:
+      - description: Signup
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.Signup'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Signup'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error_models.ErrorResponse'
+      summary: Add an Signup
+      tags:
+      - Auth
+  /middleware/api/v1/transactionHist/add:
+    post:
+      consumes:
+      - application/json
+      description: Adding TransactionHist
+      parameters:
+      - description: TransactionHist
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.TransactionHist'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.TransactionHist'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Add an TransactionHist
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/all:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all TransactionHists
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionHist'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve all TransactionHists
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/date/{date}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve TransactionHists by date
+      parameters:
+      - description: TransactionHist Date
+        in: path
+        name: date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionHist'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionHists by date
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete TransactionHist by id
+      operationId: delete-TransactionHist-by-int
+      parameters:
+      - description: TransactionHist ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionHist'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Delete TransactionHist by id
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/enabled/{enabled}:
+    get:
+      consumes:
+      - application/json
+      description: Retrive TransactionHists by Stage
+      parameters:
+      - description: TransactionHist Enabled
+        in: path
+        name: Enabled
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionHist'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionHists by enabled status
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/id/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve TransactionHist by by TransactionHistID
+      operationId: Retrieve TransactionHist by ID
+      parameters:
+      - description: TransactionHist ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/bank_fineract_models.TransactionHist'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionHist by TransactionHistID
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/locale/{locale}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Locale
+      parameters:
+      - description: TransactionHist Locale
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionHist'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionHists by Locale
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/owner/{owner}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve TransactionHists by owner
+      parameters:
+      - description: TransactionHist Owner
+        in: path
+        name: owner
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionHist'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionHists by owner
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/stage/{stage}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve TransactionHists by Stage
+      parameters:
+      - description: TransactionHist Stage
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionHist'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve  TransactionHists by Stage
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/type/{type}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Stage
+      parameters:
+      - description: TransactionHist Type
+        in: path
+        name: type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionHist'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Get TransactionHists by Type
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionHist/update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: update-TransactionHist-by-id-int
+      parameters:
+      - description: TransactionHist ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: TransactionHist
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.TransactionHist'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.TransactionHist'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Update an TransactionHist
+      tags:
+      - TransactionHist
+  /middleware/api/v1/transactionLog/add:
+    post:
+      consumes:
+      - application/json
+      description: Adding TransactionLog
+      parameters:
+      - description: TransactionLog
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.TransactionLog'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.TransactionLog'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Add an TransactionLog
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/all:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all TransactionLogs
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionLog'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve all TransactionLogs
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/date/{date}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve TransactionLogs by date
+      parameters:
+      - description: TransactionLog Date
+        in: path
+        name: date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionLog'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionLogs by date
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete TransactionLog by id
+      operationId: delete-TransactionLog-by-int
+      parameters:
+      - description: TransactionLog ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionLog'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Delete TransactionLog by id
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/enabled/{enabled}:
+    get:
+      consumes:
+      - application/json
+      description: Retrive TransactionLogs by Stage
+      parameters:
+      - description: TransactionLog Enabled
+        in: path
+        name: Enabled
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionLog'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionLogs by enabled status
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/id/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve TransactionLog by by TransactionLogID
+      operationId: Retrieve TransactionLog by ID
+      parameters:
+      - description: TransactionLog ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/bank_fineract_models.TransactionLog'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionLog by TransactionLogID
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/locale/{locale}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Locale
+      parameters:
+      - description: TransactionLog Locale
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionLog'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionLogs by Locale
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/owner/{owner}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve TransactionLogs by owner
+      parameters:
+      - description: TransactionLog Owner
+        in: path
+        name: owner
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionLog'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve TransactionLogs by owner
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/stage/{stage}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve TransactionLogs by Stage
+      parameters:
+      - description: TransactionLog Stage
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionLog'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve  TransactionLogs by Stage
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/type/{type}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Stage
+      parameters:
+      - description: TransactionLog Type
+        in: path
+        name: type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.TransactionLog'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Get TransactionLogs by Type
+      tags:
+      - TransactionLog
+  /middleware/api/v1/transactionLog/update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: update-TransactionLog-by-id-int
+      parameters:
+      - description: TransactionLog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: TransactionLog
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.TransactionLog'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.TransactionLog'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Update an TransactionLog
+      tags:
+      - TransactionLog
+  /middleware/api/v1/user/add:
+    post:
+      consumes:
+      - application/json
+      description: Adding User
+      parameters:
+      - description: User
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Add an User
+      tags:
+      - User
+  /middleware/api/v1/user/all:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all Users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve all Users
+      tags:
+      - User
+  /middleware/api/v1/user/date/{date}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Users by date
+      parameters:
+      - description: User Date
+        in: path
+        name: date
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Users by date
+      tags:
+      - User
+  /middleware/api/v1/user/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete User by id
+      operationId: delete-User-by int
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Delete User by id
+      tags:
+      - User
+  /middleware/api/v1/user/enabled/{enabled}:
+    get:
+      consumes:
+      - application/json
+      description: Retrive Users by Stage
+      parameters:
+      - description: User Enabled
+        in: path
+        name: Enabled
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Users by enabled status
+      tags:
+      - User
+  /middleware/api/v1/user/id/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve User by by UserID
+      operationId: Retrieve User by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/bank_fineract_models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve User by UserID
+      tags:
+      - User
+  /middleware/api/v1/user/locale/{locale}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Locale
+      parameters:
+      - description: User Locale
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Users by Locale
+      tags:
+      - User
+  /middleware/api/v1/user/owner/{owner}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Users by owner
+      parameters:
+      - description: User Owner
+        in: path
+        name: owner
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve Users by owner
+      tags:
+      - User
+  /middleware/api/v1/user/stage/{stage}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve Users by Stage
+      parameters:
+      - description: User Stage
+        in: path
+        name: stage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Retrieve  Users by Stage
+      tags:
+      - User
+  /middleware/api/v1/user/type/{type}:
+    get:
+      consumes:
+      - application/json
+      description: get string by Stage
+      parameters:
+      - description: User Type
+        in: path
+        name: type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bank_fineract_models.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Get Users by Type
+      tags:
+      - User
+  /middleware/api/v1/user/update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: update-User by id-nt
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: User
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/bank_fineract_models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/bank_fineract_models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/bank_fineract_models.ErrorResponse'
+      summary: Update an User
+      tags:
+      - User
+  /middleware/attribute:
+    get:
+      consumes:
+      - application/json
+      description: attribute
+      parameters:
+      - description: string enums
+        enum:
+        - A
+        - B
+        - C
+        in: query
+        name: enumstring
+        type: string
+      - description: int enums
+        enum:
+        - 1
+        - 2
+        - 3
+        in: query
+        name: enumint
+        type: integer
+      - description: int enums
+        enum:
+        - 1.1
+        - 1.2
+        - 1.3
+        in: query
+        name: enumnumber
+        type: number
+      - description: string valid
+        in: query
+        maxLength: 10
+        minLength: 5
+        name: string
+        type: string
+      - description: int valid
+        in: query
+        name: int
+        type: integer
+      - default: A
+        description: string default
+        in: query
+        name: default
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: answer
+          schema:
+            type: string
+        "400":
+          description: ok
+          schema:
+            type: string
+        "404":
+          description: ok
+          schema:
+            type: string
+        "500":
+          description: ok
+          schema:
+            type: string
+      summary: attribute example
+      tags:
+      - Security
+  /middleware/auth:
+    post:
+      consumes:
+      - application/json
+      description: get admin info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/bank_fineract_models.Admin'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: Auth admin
+      tags:
+      - Security
+  /middleware/header:
+    get:
+      consumes:
+      - application/json
+      description: custome header
+      parameters:
+      - description: Authentication header
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: answer
+          schema:
+            type: string
+        "400":
+          description: ok
+          schema:
+            type: string
+        "404":
+          description: ok
+          schema:
+            type: string
+        "500":
+          description: ok
+          schema:
+            type: string
+      summary: custome header Authorization
+      tags:
+      - Security
+  /middleware/securities:
+    get:
+      consumes:
+      - application/json
+      description: custome header
+      parameters:
+      - description: Authentication header
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: answer
+          schema:
+            type: string
+        "400":
+          description: ok
+          schema:
+            type: string
+        "404":
+          description: ok
+          schema:
+            type: string
+        "500":
+          description: ok
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - OAuth2Implicit:
+        - admin
+        - write
+      summary: custome header Authorization
+      tags:
+      - Security
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+  OAuth2AccessCode:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: accessCode
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Application:
+    flow: application
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Implicit:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: implicit
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    type: oauth2
+  OAuth2Password:
+    flow: password
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      read: ' Grants read access'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+swagger: "2.0"

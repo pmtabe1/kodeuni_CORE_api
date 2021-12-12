@@ -1,0 +1,22 @@
+------------------
+Hi paul@duxte.com,
+------------------
+
++--------+--------------------------------+--------+
+|  ITEM  |          DESCRIPTION           | PRICE  |
++--------+--------------------------------+--------+
+| Golang | Open source programming        | $10.99 |
+|        | language that makes it easy    |        |
+|        | to build simple, reliable, and |        |
+|        | efficient software             |        |
+| Hermes | Programmatically create        | $1.99  |
+|        | beautiful e-mails using        |        |
+|        | Golang.                        |        |
++--------+--------------------------------+--------+
+
+https://example-hermes.com/
+
+Yours truly,
+PosIntegration - https://example-hermes.com/
+
+Copyright © 2020 Hermes. All rights reserved.

@@ -1,0 +1,4 @@
+Hi {{.ReceiverName}},
+This is a sample test email sent using golang by {{.SenderName}}
+Message {{.Message}}
+Itented for User with Email {{.to}}

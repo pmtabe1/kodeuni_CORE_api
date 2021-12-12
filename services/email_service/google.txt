@@ -1,0 +1,26 @@
+{
+  "access_token": "ya29.a0ARrdaM_7Gzi_h4DDciKVga1VxymnmVN9LLRxZQDXvd-x9kHhjSuzkGBpBgXo1KNUg_RGQ5TfCDw3nvcu4Nrcn0mqvMUy6kPGNsd0jSQiut-OJ1l-hjGvdiqGprMikLoUu0yGHQbti-o6LvvPrnqiVOc0BrDt", 
+  "scope": "https://www.googleapis.com/auth/cloud-platform", 
+  "token_type": "Bearer", 
+  "expires_in": 3599, 
+  "refresh_token": "1//04l3BoykKZ-PdCgYIARAAGAQSNwF-L9IraavvVCyg9zxH6KBF0N2h3J7ydFTb-O4Emhe-GleK0WXl0hPorgcjTXP4S2xhGoKAgjI"
+}
+
+
+
+{
+  "error": {
+    "code": 401,
+    "message": "Request is missing required authentication credential. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "errors": [
+      {
+        "message": "Login Required.",
+        "domain": "global",
+        "reason": "required",
+        "location": "Authorization",
+        "locationType": "header"
+      }
+    ],
+    "status": "UNAUTHENTICATED"
+  }
+}

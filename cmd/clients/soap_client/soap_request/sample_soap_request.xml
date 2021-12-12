@@ -1,0 +1,55 @@
+<Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="http://soapdummies.com/api">
+	<Header />
+	<Body>
+		<Command xmlns="http://soapdummies.com/api">
+			<Credentials>
+				<Username>
+					{{.Username}}
+				</Username>
+				<Password>
+					{{.Password}}
+				</Password>
+			</Credentials>
+			<Body>
+				<SOAPDummy schemaVersion="3.0" xmlns="http://soapdummies.com/products/request">
+					<Identity>
+						<Title />
+						<FirstName>
+							{{.FirstName}}
+						</FirstName>
+						<MiddleName>
+							{{.MiddleName}}
+						</MiddleName>
+						<LastName>
+							{{.LastName}}
+						</LastName>
+						<Suffix />
+						<DOB>
+							{{.Dob}}
+						</DOB>
+						<Address>
+							<Line1>
+								{{.AddressLine1}}
+							</Line1>
+							<Line2>
+								{{.AddressLine2}}
+							</Line2>
+						</Address>
+						<City>
+							{{.City}}
+						</City>
+						<State>
+							{{.State}}
+						</State>
+						<Zip>
+							{{.ZipCode}}
+						</Zip>
+						<MobilePhone>
+							{{.MobilePhone}}
+						</MobilePhone>
+					</Identity>
+				</SOAPDummy>
+			</Body>
+		</Command>
+	</Body>
+</Envelope>

@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/jinzhu/gorm"
-	"github.com/paulmsegeya/pos/core/models/auth_models"
-	"github.com/paulmsegeya/pos/core/models/base_models"
+	"github.com/paulmsegeya/subscription/core/models/auth_models"
+	"github.com/paulmsegeya/subscription/core/models/base_models"
 	"github.com/stretchr/testify/require"
 )
 

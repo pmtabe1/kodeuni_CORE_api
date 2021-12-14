@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/jinzhu/gorm"
-	"github.com/paulmsegeya/pos/core/models/base_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
+	"github.com/paulmsegeya/subscription/core/models/base_models"
+	"github.com/paulmsegeya/subscription/core/models/subscription_models"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,35 +18,10 @@ func TestNew(t *testing.T) {
 
 func TestAdd(t *testing.T) {
 
-	ref := 29372112
+	ref := 29372113
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 	got := New().Add(&data)
@@ -58,33 +33,8 @@ func TestUpdate(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 	data.Locale = "en"
@@ -95,33 +45,8 @@ func TestUpdate(t *testing.T) {
 func TestAddOrUpdate(t *testing.T) {
 	ref := 29372115
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.Locale = "en"
 	data.ID = uint(ref)
@@ -133,33 +58,8 @@ func TestGetByID(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 
@@ -169,33 +69,8 @@ func TestGetByID(t *testing.T) {
 func TestGetByName(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 
@@ -205,33 +80,8 @@ func TestGetByName(t *testing.T) {
 func TestGetByStage(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 	data.Stage = "updated"
@@ -241,33 +91,8 @@ func TestGetByStage(t *testing.T) {
 func TestGetByType(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 
@@ -278,33 +103,8 @@ func TestGetByDate(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 
@@ -314,33 +114,8 @@ func TestGetByDate(t *testing.T) {
 func TestGetByStatus(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 
@@ -351,33 +126,8 @@ func TestGetByEnabled(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 
@@ -387,33 +137,8 @@ func TestGetByEnabled(t *testing.T) {
 func TestGetByLocale(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 	data.Locale = "en"
@@ -424,33 +149,8 @@ func TestGetByLocale(t *testing.T) {
 func TestCheckIFExists(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 	data.Locale = "en"
@@ -461,33 +161,8 @@ func TestCheckIFExists(t *testing.T) {
 func TestGetAll(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 
@@ -497,33 +172,8 @@ func TestGetAll(t *testing.T) {
 func TestDelete(t *testing.T) {
 	ref := 1
 
-	data := pos_models.Product{
-		FoundationWithDocumentBytes: base_models.FoundationWithDocumentBytes{
-			Foundation: base_models.Foundation{
-				Model:          gorm.Model{},
-				Name:           "PRODUCT",
-				Type:           "PRODUCT",
-				Stage:          "received",
-				Maker:          "Maker",
-				Checker:        "Checker",
-				Approver:       "Approver",
-				Description:    "Product ....",
-				Status:         "instock",
-				WorkflowLevels: 0,
-				SyncToken:      0,
-				Version:        0,
-				Enabled:        0,
-				Locale:         "",
-				Events:         []byte{},
-			},
-			Qrcode:     []byte{},
-			Barcode:    []byte{},
-			Attachment: []byte{},
-		},
-		ProductItemList: []*pos_models.ProductItem{},
-		WorkflowList:    []*pos_models.Workflow{},
-		Sku:             "111",
-		SN:              "222111",
+	data := subscription_models.Product{
+		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Product", Type: "Product", Stage: "added", Maker: "maker", Checker: "checker", Description: "Product", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
 

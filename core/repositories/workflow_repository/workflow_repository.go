@@ -6,30 +6,31 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/paulmsegeya/pos/constants/error_constants"
-	"github.com/paulmsegeya/pos/core/models/error_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
-	"github.com/paulmsegeya/pos/core/repositories/datalog_repository"
-	"github.com/paulmsegeya/pos/databases/pos_databases"
-	"github.com/paulmsegeya/pos/utils/stacktrace_utils"
+	"github.com/paulmsegeya/subscription/constants/error_constants"
+	"github.com/paulmsegeya/subscription/core/models/data_models"
+	"github.com/paulmsegeya/subscription/core/models/error_models"
+	"github.com/paulmsegeya/subscription/core/models/workflow_models"
+	"github.com/paulmsegeya/subscription/core/repositories/datalog_repository"
+	"github.com/paulmsegeya/subscription/databases/app_databases"
+	"github.com/paulmsegeya/subscription/utils/stacktrace_utils"
 	"gorm.io/gorm"
 )
 
 type IWorkflowRepository interface {
-	Add(data pos_models.Workflow) (repository pos_models.WorkflowRepositoryResponse)
-	Update(id uint, date pos_models.Workflow) (repository pos_models.WorkflowRepositoryResponse)
-	AddOrUpdate(id int, data pos_models.Workflow) (repository pos_models.WorkflowRepositoryResponse)
-	GetByID(id uint) (repository pos_models.WorkflowRepositoryResponse)
-	GetByName(param string) (repository pos_models.WorkflowRepositoryResponse)
-	GetByStage(param string) (repository pos_models.WorkflowRepositoryResponse)
-	GetByType(param string) (repository pos_models.WorkflowRepositoryResponse)
-	GetByDate(param string) (repository pos_models.WorkflowRepositoryResponse)
-	GetByStatus(param int) (repository pos_models.WorkflowRepositoryResponse)
-	GetByEnabled(param int) (repository pos_models.WorkflowRepositoryResponse)
-	GetByLocale(param string) (repository pos_models.WorkflowRepositoryResponse)
-	CheckIFExists(id uint) (repository pos_models.WorkflowRepositoryResponse)
-	GetAll() (repository pos_models.WorkflowRepositoryResponse)
-	Delete(id uint) (repository pos_models.WorkflowRepositoryResponse)
+	Add(data workflow_models.Workflow) (repository workflow_models.WorkflowRepositoryResponse)
+	Update(id uint, date workflow_models.Workflow) (repository workflow_models.WorkflowRepositoryResponse)
+	AddOrUpdate(id int, data workflow_models.Workflow) (repository workflow_models.WorkflowRepositoryResponse)
+	GetByID(id uint) (repository workflow_models.WorkflowRepositoryResponse)
+	GetByName(param string) (repository workflow_models.WorkflowRepositoryResponse)
+	GetByStage(param string) (repository workflow_models.WorkflowRepositoryResponse)
+	GetByType(param string) (repository workflow_models.WorkflowRepositoryResponse)
+	GetByDate(param string) (repository workflow_models.WorkflowRepositoryResponse)
+	GetByStatus(param int) (repository workflow_models.WorkflowRepositoryResponse)
+	GetByEnabled(param int) (repository workflow_models.WorkflowRepositoryResponse)
+	GetByLocale(param string) (repository workflow_models.WorkflowRepositoryResponse)
+	CheckIFExists(id uint) (repository workflow_models.WorkflowRepositoryResponse)
+	GetAll() (repository workflow_models.WorkflowRepositoryResponse)
+	Delete(id uint) (repository workflow_models.WorkflowRepositoryResponse)
 }
 type WorkflowRepository struct {
 	GormDB *gorm.DB
@@ -38,11 +39,11 @@ type WorkflowRepository struct {
 func New() *WorkflowRepository {
 
 	return &WorkflowRepository{
-		GormDB: pos_databases.New().DBConnection(),
+		GormDB: app_databases.New().DBConnection(),
 	}
 }
 
-func (r *WorkflowRepository) Add(data *pos_models.Workflow) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) Add(data *workflow_models.Workflow) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	if data == nil {
@@ -52,7 +53,7 @@ func (r *WorkflowRepository) Add(data *pos_models.Workflow) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -67,7 +68,7 @@ func (r *WorkflowRepository) Add(data *pos_models.Workflow) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -86,7 +87,7 @@ func (r *WorkflowRepository) Add(data *pos_models.Workflow) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Workflow = data
 		repository.StatusCode = http.StatusInternalServerError
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -101,7 +102,7 @@ func (r *WorkflowRepository) Add(data *pos_models.Workflow) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -126,7 +127,7 @@ func (r *WorkflowRepository) Add(data *pos_models.Workflow) (repository pos_mode
 	}
 	return repository
 }
-func (r *WorkflowRepository) Update(id uint, data *pos_models.Workflow) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) Update(id uint, data *workflow_models.Workflow) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	// Quick Validation
@@ -138,7 +139,7 @@ func (r *WorkflowRepository) Update(id uint, data *pos_models.Workflow) (reposit
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -153,7 +154,7 @@ func (r *WorkflowRepository) Update(id uint, data *pos_models.Workflow) (reposit
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -167,7 +168,7 @@ func (r *WorkflowRepository) Update(id uint, data *pos_models.Workflow) (reposit
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -186,7 +187,7 @@ func (r *WorkflowRepository) Update(id uint, data *pos_models.Workflow) (reposit
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -201,7 +202,7 @@ func (r *WorkflowRepository) Update(id uint, data *pos_models.Workflow) (reposit
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -225,7 +226,7 @@ func (r *WorkflowRepository) Update(id uint, data *pos_models.Workflow) (reposit
 	}
 	return repository
 }
-func (r *WorkflowRepository) AddOrUpdate(id uint, data *pos_models.Workflow) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) AddOrUpdate(id uint, data *workflow_models.Workflow) (repository workflow_models.WorkflowRepositoryResponse) {
 	if r.CheckIFExists(id).RepositoryStatus {
 		return r.Update(id, data)
 	} else {
@@ -233,7 +234,7 @@ func (r *WorkflowRepository) AddOrUpdate(id uint, data *pos_models.Workflow) (re
 	}
 }
 
-func (r *WorkflowRepository) GetByID(id uint) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByID(id uint) (repository workflow_models.WorkflowRepositoryResponse) {
 	err := r.GormDB.Find(&repository.WorkflowList, "id=?", id).Error
 
 	if err != nil {
@@ -242,7 +243,7 @@ func (r *WorkflowRepository) GetByID(id uint) (repository pos_models.WorkflowRep
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -266,7 +267,7 @@ func (r *WorkflowRepository) GetByID(id uint) (repository pos_models.WorkflowRep
 	return repository
 }
 
-func (r *WorkflowRepository) GetByOwnerRef(param string) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByOwnerRef(param string) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "owner_ref = ?", param).Error
 
@@ -276,7 +277,7 @@ func (r *WorkflowRepository) GetByOwnerRef(param string) (repository pos_models.
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -301,7 +302,7 @@ func (r *WorkflowRepository) GetByOwnerRef(param string) (repository pos_models.
 	return repository
 }
 
-func (r *WorkflowRepository) GetByBillID(id uint) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByBillID(id uint) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "bill_id=?", id).Error
 
@@ -311,7 +312,7 @@ func (r *WorkflowRepository) GetByBillID(id uint) (repository pos_models.Workflo
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -336,7 +337,7 @@ func (r *WorkflowRepository) GetByBillID(id uint) (repository pos_models.Workflo
 	}
 	return repository
 }
-func (r *WorkflowRepository) GetByTaxID(id uint) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByTaxID(id uint) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "tax_id=?", id).Error
 
@@ -346,7 +347,7 @@ func (r *WorkflowRepository) GetByTaxID(id uint) (repository pos_models.Workflow
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -371,7 +372,7 @@ func (r *WorkflowRepository) GetByTaxID(id uint) (repository pos_models.Workflow
 	}
 	return repository
 }
-func (r *WorkflowRepository) GetByInvoiceID(id uint) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByInvoiceID(id uint) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "invoice_id=?", id).Error
 
@@ -381,7 +382,7 @@ func (r *WorkflowRepository) GetByInvoiceID(id uint) (repository pos_models.Work
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -406,7 +407,7 @@ func (r *WorkflowRepository) GetByInvoiceID(id uint) (repository pos_models.Work
 	}
 	return repository
 }
-func (r *WorkflowRepository) GetByReceiptID(id uint) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByReceiptID(id uint) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "receipt_id=?", id).Error
 
@@ -416,7 +417,7 @@ func (r *WorkflowRepository) GetByReceiptID(id uint) (repository pos_models.Work
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -441,7 +442,7 @@ func (r *WorkflowRepository) GetByReceiptID(id uint) (repository pos_models.Work
 	}
 	return repository
 }
-func (r *WorkflowRepository) CheckIFExists(id uint) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) CheckIFExists(id uint) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "id=?", id).Error
 
@@ -473,7 +474,7 @@ func (r *WorkflowRepository) CheckIFExists(id uint) (repository pos_models.Workf
 
 	return repository
 }
-func (r *WorkflowRepository) GetAll() (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetAll() (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList).Error
 
@@ -483,7 +484,7 @@ func (r *WorkflowRepository) GetAll() (repository pos_models.WorkflowRepositoryR
 		repository.Message = "Error"
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -515,7 +516,7 @@ func (r *WorkflowRepository) GetAll() (repository pos_models.WorkflowRepositoryR
 	}
 	return repository
 }
-func (r *WorkflowRepository) Delete(id uint) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) Delete(id uint) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "id=?", id).Error
 
@@ -524,7 +525,7 @@ func (r *WorkflowRepository) Delete(id uint) (repository pos_models.WorkflowRepo
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -537,7 +538,7 @@ func (r *WorkflowRepository) Delete(id uint) (repository pos_models.WorkflowRepo
 
 		for _, v := range repository.WorkflowList {
 			v.Stage = "deleted"
-			var dataLog pos_models.Datalog
+			var dataLog data_models.Datalog
 			dataLog.ID = v.ID
 			dataLog.Type = "Workflow"
 			dataLog.Stage = "deleted"
@@ -574,7 +575,7 @@ func (r *WorkflowRepository) Delete(id uint) (repository pos_models.WorkflowRepo
 	return repository
 }
 
-func (r *WorkflowRepository) GetByName(param string) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByName(param string) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "name=?", param).Error
 
@@ -583,7 +584,7 @@ func (r *WorkflowRepository) GetByName(param string) (repository pos_models.Work
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -612,7 +613,7 @@ func (r *WorkflowRepository) GetByName(param string) (repository pos_models.Work
 	return repository
 }
 
-func (r *WorkflowRepository) GetByStage(param string) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByStage(param string) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "stage=?", param).Error
 
@@ -621,7 +622,7 @@ func (r *WorkflowRepository) GetByStage(param string) (repository pos_models.Wor
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -649,7 +650,7 @@ func (r *WorkflowRepository) GetByStage(param string) (repository pos_models.Wor
 	return repository
 }
 
-func (r *WorkflowRepository) GetByType(param string) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByType(param string) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "type=?", param).Error
 
@@ -658,7 +659,7 @@ func (r *WorkflowRepository) GetByType(param string) (repository pos_models.Work
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -685,7 +686,7 @@ func (r *WorkflowRepository) GetByType(param string) (repository pos_models.Work
 	}
 	return repository
 }
-func (r *WorkflowRepository) GetByDate(param string) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByDate(param string) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	err := r.GormDB.Find(&repository.WorkflowList, "created_at=?", param).Or(&repository.WorkflowList, "updated_at=?", param).Or(&repository.WorkflowList, "deleted_at=?", param).Error
@@ -694,7 +695,7 @@ func (r *WorkflowRepository) GetByDate(param string) (repository pos_models.Work
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -721,7 +722,7 @@ func (r *WorkflowRepository) GetByDate(param string) (repository pos_models.Work
 	}
 	return repository
 }
-func (r *WorkflowRepository) GetByStatus(param int) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByStatus(param int) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "status=?", param).Error
 
@@ -730,7 +731,7 @@ func (r *WorkflowRepository) GetByStatus(param int) (repository pos_models.Workf
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -761,7 +762,7 @@ func (r *WorkflowRepository) GetByStatus(param int) (repository pos_models.Workf
 	}
 	return repository
 }
-func (r *WorkflowRepository) GetByEnabled(param int) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByEnabled(param int) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	err := r.GormDB.Find(&repository.WorkflowList, "enabled=?", param).Error
@@ -771,7 +772,7 @@ func (r *WorkflowRepository) GetByEnabled(param int) (repository pos_models.Work
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -798,7 +799,7 @@ func (r *WorkflowRepository) GetByEnabled(param int) (repository pos_models.Work
 	}
 	return repository
 }
-func (r *WorkflowRepository) GetByLocate(param string) (repository pos_models.WorkflowRepositoryResponse) {
+func (r *WorkflowRepository) GetByLocate(param string) (repository workflow_models.WorkflowRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.WorkflowList, "locale=?", param).Error
 
@@ -807,7 +808,7 @@ func (r *WorkflowRepository) GetByLocate(param string) (repository pos_models.Wo
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Workflow = nil
-		repository.WorkflowList = make([]*pos_models.Workflow, 0)
+		repository.WorkflowList = make([]*workflow_models.Workflow, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode

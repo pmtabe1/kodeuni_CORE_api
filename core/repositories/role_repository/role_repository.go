@@ -6,13 +6,14 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/paulmsegeya/pos/constants/error_constants"
-	"github.com/paulmsegeya/pos/core/models/auth_models"
-	"github.com/paulmsegeya/pos/core/models/error_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
-	"github.com/paulmsegeya/pos/core/repositories/datalog_repository"
-	"github.com/paulmsegeya/pos/databases/pos_databases"
-	"github.com/paulmsegeya/pos/utils/stacktrace_utils"
+	"github.com/paulmsegeya/subcription/constants/error_constants"
+	"github.com/paulmsegeya/subcription/core/models/auth_models"
+	"github.com/paulmsegeya/subcription/core/models/error_models"
+	"github.com/paulmsegeya/subcription/core/models/subscription_models"
+	"github.com/paulmsegeya/subcription/core/repositories/datalog_repository"
+	"github.com/paulmsegeya/subcription/databases/app_databases"
+	"github.com/paulmsegeya/subcription/utils/stacktrace_utils"
+	"github.com/paulmsegeya/subscription/core/models/data_models"
 	"gorm.io/gorm"
 )
 
@@ -39,7 +40,7 @@ type RoleRepository struct {
 func New() *RoleRepository {
 
 	return &RoleRepository{
-		GormDB: pos_databases.New().DBConnection(),
+		GormDB: app_databases.New().DBConnection(),
 	}
 }
 
@@ -538,7 +539,7 @@ func (r *RoleRepository) Delete(id uint) (repository auth_models.RoleRepositoryR
 
 		for _, v := range repository.RoleList {
 			v.Stage = "deleted"
-			var dataLog pos_models.Datalog
+			var dataLog data_models.Datalog
 			dataLog.ID = v.ID
 			dataLog.Type = "Role"
 			dataLog.Stage = "deleted"

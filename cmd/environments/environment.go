@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/paulmsegeya/subscription/constants/app_constants"
 )
 
 type IEnvironment interface {
@@ -20,26 +22,25 @@ func New() *Environment {
 
 func GetConfiguredConfigurationFile() (fileLocation string) {
 
-	templated := `"/etc/integrations/conf/pos/config.%v.json"`
+	templated := `"/etc/integrations/conf/%v/config.%v.json"`
 
 	deployment := GetEnvironmentDeploymentStatus()
 
 	if deployment == "dev" {
 
-		fileLocation = os.Getenv("POS_CONFIG")
+		fileLocation = os.Getenv(app_constants.AppConfigLocationEnvName)
 
 		if len(fileLocation) == 0 {
-
-			os.Setenv("POS_CONFIG", filepath.FromSlash(fmt.Sprintf(templated, deployment)))
+			os.Setenv(app_constants.AppConfigLocationEnvName, filepath.FromSlash(fmt.Sprintf(templated, app_constants.AppName, deployment)))
 			deployment = GetConfiguredConfigurationFile()
 		}
 
 	} else if deployment == "prod" {
-		fileLocation = os.Getenv("POS_CONFIG")
+		fileLocation = os.Getenv(app_constants.AppConfigLocationEnvName)
 
 		if len(fileLocation) == 0 {
 
-			os.Setenv("POS_CONFIG", filepath.FromSlash(fmt.Sprintf(templated, deployment)))
+			os.Setenv(app_constants.AppConfigLocationEnvName, filepath.FromSlash(fmt.Sprintf(templated, app_constants.AppName, deployment)))
 			deployment = GetConfiguredConfigurationFile()
 		}
 

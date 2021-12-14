@@ -1,38 +1,36 @@
 package customer_repository
 
-
-
-
 import (
 	"errors"
 	"log"
 	"net/http"
 	"time"
 
-	"github.com/paulmsegeya/pos/constants/error_constants"
-	"github.com/paulmsegeya/pos/core/models/error_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
-	"github.com/paulmsegeya/pos/core/repositories/datalog_repository"
-	"github.com/paulmsegeya/pos/databases/pos_databases"
-	"github.com/paulmsegeya/pos/utils/stacktrace_utils"
+	"github.com/paulmsegeya/subscription/constants/error_constants"
+	"github.com/paulmsegeya/subscription/core/models/data_models"
+	"github.com/paulmsegeya/subscription/core/models/error_models"
+	"github.com/paulmsegeya/subscription/core/models/subscription_models"
+	"github.com/paulmsegeya/subscription/core/repositories/datalog_repository"
+	"github.com/paulmsegeya/subscription/databases/app_databases"
+	"github.com/paulmsegeya/subscription/utils/stacktrace_utils"
 	"gorm.io/gorm"
 )
 
 type ICustomerRepository interface {
-	Add(data pos_models.Customer) (repository pos_models.CustomerRepositoryResponse)
-	Update(id uint, date pos_models.Customer) (repository pos_models.CustomerRepositoryResponse)
-	AddOrUpdate(id int, data pos_models.Customer) (repository pos_models.CustomerRepositoryResponse)
-	GetByID(id uint) (repository pos_models.CustomerRepositoryResponse)
-	GetByName(param string) (repository pos_models.CustomerRepositoryResponse)
-	GetByStage(param string) (repository pos_models.CustomerRepositoryResponse)
-	GetByType(param string) (repository pos_models.CustomerRepositoryResponse)
-	GetByDate(param string) (repository pos_models.CustomerRepositoryResponse)
-	GetByStatus(param int) (repository pos_models.CustomerRepositoryResponse)
-	GetByEnabled(param int) (repository pos_models.CustomerRepositoryResponse)
-	GetByLocale(param string) (repository pos_models.CustomerRepositoryResponse)
-	CheckIFExists(id uint) (repository pos_models.CustomerRepositoryResponse)
-	GetAll() (repository pos_models.CustomerRepositoryResponse)
-	Delete(id uint) (repository pos_models.CustomerRepositoryResponse)
+	Add(data subscription_models.Customer) (repository subscription_models.CustomerRepositoryResponse)
+	Update(id uint, date subscription_models.Customer) (repository subscription_models.CustomerRepositoryResponse)
+	AddOrUpdate(id int, data subscription_models.Customer) (repository subscription_models.CustomerRepositoryResponse)
+	GetByID(id uint) (repository subscription_models.CustomerRepositoryResponse)
+	GetByName(param string) (repository subscription_models.CustomerRepositoryResponse)
+	GetByStage(param string) (repository subscription_models.CustomerRepositoryResponse)
+	GetByType(param string) (repository subscription_models.CustomerRepositoryResponse)
+	GetByDate(param string) (repository subscription_models.CustomerRepositoryResponse)
+	GetByStatus(param int) (repository subscription_models.CustomerRepositoryResponse)
+	GetByEnabled(param int) (repository subscription_models.CustomerRepositoryResponse)
+	GetByLocale(param string) (repository subscription_models.CustomerRepositoryResponse)
+	CheckIFExists(id uint) (repository subscription_models.CustomerRepositoryResponse)
+	GetAll() (repository subscription_models.CustomerRepositoryResponse)
+	Delete(id uint) (repository subscription_models.CustomerRepositoryResponse)
 }
 type CustomerRepository struct {
 	GormDB *gorm.DB
@@ -41,11 +39,11 @@ type CustomerRepository struct {
 func New() *CustomerRepository {
 
 	return &CustomerRepository{
-		GormDB: pos_databases.New().DBConnection(),
+		GormDB: app_databases.New().DBConnection(),
 	}
 }
 
-func (r *CustomerRepository) Add(data *pos_models.Customer) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) Add(data *subscription_models.Customer) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	if data == nil {
@@ -55,7 +53,7 @@ func (r *CustomerRepository) Add(data *pos_models.Customer) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Customer = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -70,7 +68,7 @@ func (r *CustomerRepository) Add(data *pos_models.Customer) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Customer = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -89,7 +87,7 @@ func (r *CustomerRepository) Add(data *pos_models.Customer) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Customer = data
 		repository.StatusCode = http.StatusInternalServerError
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -104,7 +102,7 @@ func (r *CustomerRepository) Add(data *pos_models.Customer) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Customer = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -129,7 +127,7 @@ func (r *CustomerRepository) Add(data *pos_models.Customer) (repository pos_mode
 	}
 	return repository
 }
-func (r *CustomerRepository) Update(id uint, data *pos_models.Customer) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) Update(id uint, data *subscription_models.Customer) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	// Quick Validation
@@ -141,7 +139,7 @@ func (r *CustomerRepository) Update(id uint, data *pos_models.Customer) (reposit
 		repository.RepositoryStatus = false
 		repository.Customer = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -156,7 +154,7 @@ func (r *CustomerRepository) Update(id uint, data *pos_models.Customer) (reposit
 		repository.RepositoryStatus = false
 		repository.Customer = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -170,7 +168,7 @@ func (r *CustomerRepository) Update(id uint, data *pos_models.Customer) (reposit
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -189,7 +187,7 @@ func (r *CustomerRepository) Update(id uint, data *pos_models.Customer) (reposit
 		repository.RepositoryStatus = false
 		repository.Customer = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -204,7 +202,7 @@ func (r *CustomerRepository) Update(id uint, data *pos_models.Customer) (reposit
 		repository.RepositoryStatus = false
 		repository.Customer = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -228,7 +226,7 @@ func (r *CustomerRepository) Update(id uint, data *pos_models.Customer) (reposit
 	}
 	return repository
 }
-func (r *CustomerRepository) AddOrUpdate(id uint, data *pos_models.Customer) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) AddOrUpdate(id uint, data *subscription_models.Customer) (repository subscription_models.CustomerRepositoryResponse) {
 	if r.CheckIFExists(id).RepositoryStatus {
 		return r.Update(id, data)
 	} else {
@@ -236,7 +234,7 @@ func (r *CustomerRepository) AddOrUpdate(id uint, data *pos_models.Customer) (re
 	}
 }
 
-func (r *CustomerRepository) GetByID(id uint) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByID(id uint) (repository subscription_models.CustomerRepositoryResponse) {
 	err := r.GormDB.Find(&repository.CustomerList, "id=?", id).Error
 
 	if err != nil {
@@ -245,7 +243,7 @@ func (r *CustomerRepository) GetByID(id uint) (repository pos_models.CustomerRep
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -269,7 +267,7 @@ func (r *CustomerRepository) GetByID(id uint) (repository pos_models.CustomerRep
 	return repository
 }
 
-func (r *CustomerRepository) GetByOwnerRef(param string) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByOwnerRef(param string) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "owner_ref = ?", param).Error
 
@@ -279,7 +277,7 @@ func (r *CustomerRepository) GetByOwnerRef(param string) (repository pos_models.
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -304,7 +302,7 @@ func (r *CustomerRepository) GetByOwnerRef(param string) (repository pos_models.
 	return repository
 }
 
-func (r *CustomerRepository) GetByBillID(id uint) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByBillID(id uint) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "bill_id=?", id).Error
 
@@ -314,7 +312,7 @@ func (r *CustomerRepository) GetByBillID(id uint) (repository pos_models.Custome
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -339,7 +337,7 @@ func (r *CustomerRepository) GetByBillID(id uint) (repository pos_models.Custome
 	}
 	return repository
 }
-func (r *CustomerRepository) GetByTaxID(id uint) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByTaxID(id uint) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "tax_id=?", id).Error
 
@@ -349,7 +347,7 @@ func (r *CustomerRepository) GetByTaxID(id uint) (repository pos_models.Customer
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -374,7 +372,7 @@ func (r *CustomerRepository) GetByTaxID(id uint) (repository pos_models.Customer
 	}
 	return repository
 }
-func (r *CustomerRepository) GetByInvoiceID(id uint) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByInvoiceID(id uint) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "invoice_id=?", id).Error
 
@@ -384,7 +382,7 @@ func (r *CustomerRepository) GetByInvoiceID(id uint) (repository pos_models.Cust
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -409,7 +407,7 @@ func (r *CustomerRepository) GetByInvoiceID(id uint) (repository pos_models.Cust
 	}
 	return repository
 }
-func (r *CustomerRepository) GetByReceiptID(id uint) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByReceiptID(id uint) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "receipt_id=?", id).Error
 
@@ -419,7 +417,7 @@ func (r *CustomerRepository) GetByReceiptID(id uint) (repository pos_models.Cust
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -444,7 +442,7 @@ func (r *CustomerRepository) GetByReceiptID(id uint) (repository pos_models.Cust
 	}
 	return repository
 }
-func (r *CustomerRepository) CheckIFExists(id uint) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) CheckIFExists(id uint) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "id=?", id).Error
 
@@ -476,7 +474,7 @@ func (r *CustomerRepository) CheckIFExists(id uint) (repository pos_models.Custo
 
 	return repository
 }
-func (r *CustomerRepository) GetAll() (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetAll() (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList).Error
 
@@ -486,7 +484,7 @@ func (r *CustomerRepository) GetAll() (repository pos_models.CustomerRepositoryR
 		repository.Message = "Error"
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -518,7 +516,7 @@ func (r *CustomerRepository) GetAll() (repository pos_models.CustomerRepositoryR
 	}
 	return repository
 }
-func (r *CustomerRepository) Delete(id uint) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) Delete(id uint) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "id=?", id).Error
 
@@ -527,7 +525,7 @@ func (r *CustomerRepository) Delete(id uint) (repository pos_models.CustomerRepo
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -540,7 +538,7 @@ func (r *CustomerRepository) Delete(id uint) (repository pos_models.CustomerRepo
 
 		for _, v := range repository.CustomerList {
 			v.Stage = "deleted"
-			var dataLog pos_models.Datalog
+			var dataLog data_models.Datalog
 			dataLog.ID = v.ID
 			dataLog.Type = "Customer"
 			dataLog.Stage = "deleted"
@@ -577,7 +575,7 @@ func (r *CustomerRepository) Delete(id uint) (repository pos_models.CustomerRepo
 	return repository
 }
 
-func (r *CustomerRepository) GetByName(param string) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByName(param string) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "name=?", param).Error
 
@@ -586,7 +584,7 @@ func (r *CustomerRepository) GetByName(param string) (repository pos_models.Cust
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -615,7 +613,7 @@ func (r *CustomerRepository) GetByName(param string) (repository pos_models.Cust
 	return repository
 }
 
-func (r *CustomerRepository) GetByStage(param string) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByStage(param string) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "stage=?", param).Error
 
@@ -624,7 +622,7 @@ func (r *CustomerRepository) GetByStage(param string) (repository pos_models.Cus
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -652,7 +650,7 @@ func (r *CustomerRepository) GetByStage(param string) (repository pos_models.Cus
 	return repository
 }
 
-func (r *CustomerRepository) GetByType(param string) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByType(param string) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "type=?", param).Error
 
@@ -661,7 +659,7 @@ func (r *CustomerRepository) GetByType(param string) (repository pos_models.Cust
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -688,7 +686,7 @@ func (r *CustomerRepository) GetByType(param string) (repository pos_models.Cust
 	}
 	return repository
 }
-func (r *CustomerRepository) GetByDate(param string) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByDate(param string) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	err := r.GormDB.Find(&repository.CustomerList, "created_at=?", param).Or(&repository.CustomerList, "updated_at=?", param).Or(&repository.CustomerList, "deleted_at=?", param).Error
@@ -697,7 +695,7 @@ func (r *CustomerRepository) GetByDate(param string) (repository pos_models.Cust
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -724,7 +722,7 @@ func (r *CustomerRepository) GetByDate(param string) (repository pos_models.Cust
 	}
 	return repository
 }
-func (r *CustomerRepository) GetByStatus(param int) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByStatus(param int) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "status=?", param).Error
 
@@ -733,7 +731,7 @@ func (r *CustomerRepository) GetByStatus(param int) (repository pos_models.Custo
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -764,7 +762,7 @@ func (r *CustomerRepository) GetByStatus(param int) (repository pos_models.Custo
 	}
 	return repository
 }
-func (r *CustomerRepository) GetByEnabled(param int) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByEnabled(param int) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	err := r.GormDB.Find(&repository.CustomerList, "enabled=?", param).Error
@@ -774,7 +772,7 @@ func (r *CustomerRepository) GetByEnabled(param int) (repository pos_models.Cust
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -801,7 +799,7 @@ func (r *CustomerRepository) GetByEnabled(param int) (repository pos_models.Cust
 	}
 	return repository
 }
-func (r *CustomerRepository) GetByLocate(param string) (repository pos_models.CustomerRepositoryResponse) {
+func (r *CustomerRepository) GetByLocate(param string) (repository subscription_models.CustomerRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.CustomerList, "locale=?", param).Error
 
@@ -810,7 +808,7 @@ func (r *CustomerRepository) GetByLocate(param string) (repository pos_models.Cu
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Customer = nil
-		repository.CustomerList = make([]*pos_models.Customer, 0)
+		repository.CustomerList = make([]*subscription_models.Customer, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -837,5 +835,3 @@ func (r *CustomerRepository) GetByLocate(param string) (repository pos_models.Cu
 	}
 	return repository
 }
-
-

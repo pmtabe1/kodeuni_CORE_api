@@ -1,13 +1,11 @@
 package datalog_repository
 
-
-
 import (
 	"testing"
 
 	"github.com/jinzhu/gorm"
-	"github.com/paulmsegeya/pos/core/models/base_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
+	"github.com/paulmsegeya/subscription/core/models/base_models"
+	"github.com/paulmsegeya/subscription/core/models/data_models"
 	"github.com/stretchr/testify/require"
 )
 
@@ -22,7 +20,7 @@ func TestAdd(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -35,7 +33,7 @@ func TestUpdate(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -47,10 +45,10 @@ func TestUpdate(t *testing.T) {
 func TestAddOrUpdate(t *testing.T) {
 	ref := 29372115
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
-	data.Locale="en"
+	data.Locale = "en"
 	data.ID = uint(ref)
 
 	got := New().AddOrUpdate(uint(ref), &data)
@@ -60,7 +58,7 @@ func TestGetByID(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -71,7 +69,7 @@ func TestGetByID(t *testing.T) {
 func TestGetByName(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -82,18 +80,18 @@ func TestGetByName(t *testing.T) {
 func TestGetByStage(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
-	data.Stage="updated"
+	data.Stage = "updated"
 	got := New().GetByStage(data.Stage)
 	require.NotNilf(t, got.Datalog, "Expected non Nil but received %v  instead", got.DatalogList)
 }
 func TestGetByType(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -105,7 +103,7 @@ func TestGetByDate(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -116,7 +114,7 @@ func TestGetByDate(t *testing.T) {
 func TestGetByStatus(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -128,7 +126,7 @@ func TestGetByEnabled(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -139,7 +137,7 @@ func TestGetByEnabled(t *testing.T) {
 func TestGetByLocale(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -151,7 +149,7 @@ func TestGetByLocale(t *testing.T) {
 func TestCheckIFExists(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -163,7 +161,7 @@ func TestCheckIFExists(t *testing.T) {
 func TestGetAll(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)
@@ -174,7 +172,7 @@ func TestGetAll(t *testing.T) {
 func TestDelete(t *testing.T) {
 	ref := 1
 
-	data := pos_models.Datalog{
+	data := data_models.Datalog{
 		Foundation: base_models.Foundation{Model: gorm.Model{}, Name: "Datalog", Type: "Datalog", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Datalog", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 	}
 	data.ID = uint(ref)

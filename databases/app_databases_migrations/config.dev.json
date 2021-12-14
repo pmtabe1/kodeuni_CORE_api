@@ -1,0 +1,39 @@
+{
+    "Integration": {
+        "RouteSource": "to",
+        "From": {
+            "HostName": "SAGE 300",
+            "Server": "localhost",
+            "Database": {
+                "Source": "To",
+                "Host": "localhost",
+                "Engine": "mssql",
+                "IP": "",
+                "Port": "1433",
+                "Username": "sa",
+                "Password": "someThingComplicated1234",
+                "SslEnabled": false,
+                "SslCertsPath": "",
+                "Schema": "",
+                "DBName": "subscription"
+            }
+        },
+        "To": {
+            "HostName": "subscription",
+            "Server": "localhost",
+            "Database": {
+                "Source": "From",
+                "Host": "localhost",
+                "Engine": "mysql",
+                "IP": "",
+                "Port": "3306",
+                "Username": "root",
+                "Password": "gr00t00",
+                "SslEnabled": false,
+                "SslCertsPath": "",
+                "Schema": "",
+                "DBName": "subscription"
+            }
+        }
+    }
+}

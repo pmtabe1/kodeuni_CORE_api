@@ -1,4 +1,4 @@
-module github.com/paulmsegeya/pos
+module github.com/paulmsegeya/subscription
 
 go 1.17
 

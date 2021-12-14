@@ -2,10 +2,12 @@ package customer_repository
 
 import (
 	"testing"
-	"github.com/paulmsegeya/pos/core/models/base_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
-	"github.com/paulmsegeya/pos/core/models/auth_models"
+	"time"
 
+	"github.com/paulmsegeya/subscription/core/models/auth_models"
+	"github.com/paulmsegeya/subscription/core/models/base_models"
+	"github.com/paulmsegeya/subscription/core/models/subscription_models"
+	"github.com/paulmsegeya/subscription/core/models/workflow_models"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,20 +20,33 @@ func TestNew(t *testing.T) {
 
 func TestAdd(t *testing.T) {
 
-	ref := 29372112
+	ref := 29372113
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 	got := New().Add(&data)
@@ -43,18 +58,31 @@ func TestUpdate(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 	data.Locale = "en"
@@ -65,18 +93,31 @@ func TestUpdate(t *testing.T) {
 func TestAddOrUpdate(t *testing.T) {
 	ref := 29372115
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.Locale = "en"
 	data.ID = uint(ref)
@@ -88,18 +129,31 @@ func TestGetByID(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 
@@ -109,18 +163,31 @@ func TestGetByID(t *testing.T) {
 func TestGetByName(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 
@@ -130,18 +197,31 @@ func TestGetByName(t *testing.T) {
 func TestGetByStage(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 	data.Stage = "updated"
@@ -151,18 +231,31 @@ func TestGetByStage(t *testing.T) {
 func TestGetByType(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 
@@ -173,18 +266,31 @@ func TestGetByDate(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 
@@ -194,18 +300,31 @@ func TestGetByDate(t *testing.T) {
 func TestGetByStatus(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 
@@ -216,18 +335,31 @@ func TestGetByEnabled(t *testing.T) {
 
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 
@@ -237,18 +369,31 @@ func TestGetByEnabled(t *testing.T) {
 func TestGetByLocale(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 	data.Locale = "en"
@@ -259,18 +404,31 @@ func TestGetByLocale(t *testing.T) {
 func TestCheckIFExists(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 	data.Locale = "en"
@@ -281,18 +439,31 @@ func TestCheckIFExists(t *testing.T) {
 func TestGetAll(t *testing.T) {
 	ref := 29372112
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 
@@ -302,18 +473,31 @@ func TestGetAll(t *testing.T) {
 func TestDelete(t *testing.T) {
 	ref := 1
 
-	data := pos_models.Customer{
+	data := subscription_models.Customer{
 		User: auth_models.User{
-			Foundation:    base_models.Foundation{},
-			Firstname:     "CustomerFname",
-			Lastname:      "CustomerLname",
-			Dob:           "2020-01-10",
-			Mobile:        "937927329",
-			RegisterID:    0,
-			TillID:        0,
-			UtilizationID: 0,
+			Foundation:       base_models.Foundation{},
+			Firstname:        "CustomerFname",
+			Lastname:         "CustomerLname",
+			Username:         "CustomerUsername",
+			Email:            "m@p.com",
+			Password:         "232323",
+			Realm:            "13133",
+			SecretKey:        "2232323",
+			MaxRefresh:       time.Time{},
+			Timeout:          time.Time{},
+			IdentityKey:      "",
+			VerificationLink: "",
+			Key:              []byte{},
+			Dob:              "",
+			Mobile:           "",
+			RegisterID:       0,
+			TillID:           0,
+			UtilizationID:    0,
+			GroupID:          0,
+			RoleList:         []*auth_models.Role{},
+			WorkflowList:     []*workflow_models.Workflow{},
 		},
-		WorkflowList: []*pos_models.Workflow{},
+		WorkflowList: []*workflow_models.Workflow{},
 	}
 	data.ID = uint(ref)
 

@@ -6,13 +6,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/paulmsegeya/pos/constants/error_constants"
-	"github.com/paulmsegeya/pos/core/models/auth_models"
-	"github.com/paulmsegeya/pos/core/models/error_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
-	"github.com/paulmsegeya/pos/core/repositories/datalog_repository"
-	"github.com/paulmsegeya/pos/databases/pos_databases"
-	"github.com/paulmsegeya/pos/utils/stacktrace_utils"
+	"github.com/paulmsegeya/subscription/constants/error_constants"
+	"github.com/paulmsegeya/subscription/core/models/auth_models"
+	"github.com/paulmsegeya/subscription/core/models/data_models"
+	"github.com/paulmsegeya/subscription/core/models/error_models"
+	"github.com/paulmsegeya/subscription/core/repositories/datalog_repository"
+	"github.com/paulmsegeya/subscription/databases/app_databases"
+	"github.com/paulmsegeya/subscription/utils/stacktrace_utils"
 	"gorm.io/gorm"
 )
 
@@ -39,13 +39,13 @@ type GroupRepository struct {
 func New() *GroupRepository {
 
 	return &GroupRepository{
-		GormDB: pos_databases.New().DBConnection(),
+		GormDB: app_databases.New().DBConnection(),
 	}
 }
 
 func (r *GroupRepository) Add(data *auth_models.Group) (repository auth_models.GroupRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
-	
+
 	if data == nil {
 
 		repository.Error = error_constants.NilDataErrorMessage
@@ -538,7 +538,7 @@ func (r *GroupRepository) Delete(id uint) (repository auth_models.GroupRepositor
 
 		for _, v := range repository.GroupList {
 			v.Stage = "deleted"
-			var dataLog pos_models.Datalog
+			var dataLog data_models.Datalog
 			dataLog.ID = v.ID
 			dataLog.Type = "Group"
 			dataLog.Stage = "deleted"
@@ -615,7 +615,7 @@ func (r *GroupRepository) GetByName(param string) (repository auth_models.GroupR
 
 func (r *GroupRepository) GetByGroupname(param string) (repository auth_models.GroupRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
-	err := r.GormDB.Find(&repository.GroupList, "Groupname=?", param).Error
+	err := r.GormDB.Find(&repository.GroupList, "name=?", param).Error
 
 	if err != nil {
 		repository.Error = err.Error()
@@ -873,5 +873,3 @@ func (r *GroupRepository) GetByLocate(param string) (repository auth_models.Grou
 	}
 	return repository
 }
-
-

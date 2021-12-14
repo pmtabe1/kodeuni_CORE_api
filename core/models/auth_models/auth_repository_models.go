@@ -1,10 +1,20 @@
 package auth_models
 
-import "github.com/paulmsegeya/pos/core/models/error_models"
+import "github.com/paulmsegeya/subscription/core/models/error_models"
 
 type SignupRepositoryResponse struct {
 	Signup                  *Signup
 	SignupList              []*Signup
+	StatusCode              int
+	RepositoryStatus        bool
+	Error                   string
+	Message                 string
+	RepositoryErrorResponse *error_models.ErrorModel
+}
+
+type SecretRepositoryResponse struct {
+	Secret                  *Secret
+	SecretList              []*Secret
 	StatusCode              int
 	RepositoryStatus        bool
 	Error                   string

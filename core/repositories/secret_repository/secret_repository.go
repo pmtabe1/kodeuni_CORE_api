@@ -6,32 +6,33 @@ import (
 
 	"time"
 
-	"github.com/paulmsegeya/pos/core/models/error_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
-	"github.com/paulmsegeya/pos/core/repositories/datalog_repository"
-	"github.com/paulmsegeya/pos/databases/pos_databases"
-	"github.com/paulmsegeya/pos/utils/stacktrace_utils"
+	"github.com/paulmsegeya/subscription/core/models/auth_models"
+	"github.com/paulmsegeya/subscription/core/models/data_models"
+	"github.com/paulmsegeya/subscription/core/models/error_models"
+	"github.com/paulmsegeya/subscription/core/repositories/datalog_repository"
+	"github.com/paulmsegeya/subscription/databases/app_databases"
+	"github.com/paulmsegeya/subscription/utils/stacktrace_utils"
 	"gorm.io/gorm"
 )
 
 type ISecretGORMRepository interface {
-	Add(data pos_models.Secret) (repository pos_models.SecretRepositoryResponse)
-	Update(id uint, date pos_models.Secret) (repository pos_models.SecretRepositoryResponse)
-	AddOrUpdate(id int, data pos_models.Secret) (repository pos_models.SecretRepositoryResponse)
-	GetByID(id uint) (repository pos_models.SecretRepositoryResponse)
-	GetByName(param string) (repository pos_models.SecretRepositoryResponse)
-	GetByStage(param string) (repository pos_models.SecretRepositoryResponse)
-	GetByType(param string) (repository pos_models.SecretRepositoryResponse)
-	GetByDate(param string) (repository pos_models.SecretRepositoryResponse)
-	GetByStatus(param int) (repository pos_models.SecretRepositoryResponse)
-	GetByEnabled(param int) (repository pos_models.SecretRepositoryResponse)
-	GetByLocale(param string) (repository pos_models.SecretRepositoryResponse)
-	GetBySecretID(param string) (repository pos_models.SecretRepositoryResponse)
-	GetByClientID(param string) (repository pos_models.SecretRepositoryResponse)
-	GetByToken(param string) (repository pos_models.SecretRepositoryResponse)
-	GetByOwnerRef(param string) (repository pos_models.SecretRepositoryResponse)
-	CheckIFExists(id uint) (repository pos_models.SecretRepositoryResponse)
-	GetAll() (repository pos_models.SecretRepositoryResponse)
+	Add(data auth_models.Secret) (repository auth_models.SecretRepositoryResponse)
+	Update(id uint, date auth_models.Secret) (repository auth_models.SecretRepositoryResponse)
+	AddOrUpdate(id int, data auth_models.Secret) (repository auth_models.SecretRepositoryResponse)
+	GetByID(id uint) (repository auth_models.SecretRepositoryResponse)
+	GetByName(param string) (repository auth_models.SecretRepositoryResponse)
+	GetByStage(param string) (repository auth_models.SecretRepositoryResponse)
+	GetByType(param string) (repository auth_models.SecretRepositoryResponse)
+	GetByDate(param string) (repository auth_models.SecretRepositoryResponse)
+	GetByStatus(param int) (repository auth_models.SecretRepositoryResponse)
+	GetByEnabled(param int) (repository auth_models.SecretRepositoryResponse)
+	GetByLocale(param string) (repository auth_models.SecretRepositoryResponse)
+	GetBySecretID(param string) (repository auth_models.SecretRepositoryResponse)
+	GetByClientID(param string) (repository auth_models.SecretRepositoryResponse)
+	GetByToken(param string) (repository auth_models.SecretRepositoryResponse)
+	GetByOwnerRef(param string) (repository auth_models.SecretRepositoryResponse)
+	CheckIFExists(id uint) (repository auth_models.SecretRepositoryResponse)
+	GetAll() (repository auth_models.SecretRepositoryResponse)
 	Delete(id uint)
 }
 
@@ -42,11 +43,11 @@ type SecretGORMRepository struct {
 func New() *SecretGORMRepository {
 
 	return &SecretGORMRepository{
-		GormDB: pos_databases.New().DBConnection(),
+		GormDB: app_databases.New().DBConnection(),
 	}
 }
 
-func (r *SecretGORMRepository) Add(data *pos_models.Secret) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) Add(data *auth_models.Secret) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	data.Stage = "added"
 	err := r.GormDB.Save(&data).Error
@@ -57,7 +58,7 @@ func (r *SecretGORMRepository) Add(data *pos_models.Secret) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Secret = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -72,7 +73,7 @@ func (r *SecretGORMRepository) Add(data *pos_models.Secret) (repository pos_mode
 		repository.RepositoryStatus = false
 		repository.Secret = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -97,7 +98,7 @@ func (r *SecretGORMRepository) Add(data *pos_models.Secret) (repository pos_mode
 	}
 	return repository
 }
-func (r *SecretGORMRepository) Update(id uint, data *pos_models.Secret) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) Update(id uint, data *auth_models.Secret) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	// Quick Validation
@@ -109,7 +110,7 @@ func (r *SecretGORMRepository) Update(id uint, data *pos_models.Secret) (reposit
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -127,7 +128,7 @@ func (r *SecretGORMRepository) Update(id uint, data *pos_models.Secret) (reposit
 		repository.RepositoryStatus = false
 		repository.Secret = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -143,7 +144,7 @@ func (r *SecretGORMRepository) Update(id uint, data *pos_models.Secret) (reposit
 		repository.RepositoryStatus = false
 		repository.Secret = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -169,7 +170,7 @@ func (r *SecretGORMRepository) Update(id uint, data *pos_models.Secret) (reposit
 	}
 	return repository
 }
-func (r *SecretGORMRepository) AddOrUpdate(id uint, data *pos_models.Secret) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) AddOrUpdate(id uint, data *auth_models.Secret) (repository auth_models.SecretRepositoryResponse) {
 	if r.CheckIFExists(id).RepositoryStatus {
 		return r.Update(id, data)
 	} else {
@@ -177,7 +178,7 @@ func (r *SecretGORMRepository) AddOrUpdate(id uint, data *pos_models.Secret) (re
 	}
 }
 
-func (r *SecretGORMRepository) GetByID(id uint) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByID(id uint) (repository auth_models.SecretRepositoryResponse) {
 
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "id=?", id).Error
@@ -188,7 +189,7 @@ func (r *SecretGORMRepository) GetByID(id uint) (repository pos_models.SecretRep
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -214,7 +215,7 @@ func (r *SecretGORMRepository) GetByID(id uint) (repository pos_models.SecretRep
 	return repository
 }
 
-func (r *SecretGORMRepository) GetByOwnerRef(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByOwnerRef(param string) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "owner_ref = ?", param).Error
 
@@ -224,7 +225,7 @@ func (r *SecretGORMRepository) GetByOwnerRef(param string) (repository pos_model
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -248,7 +249,7 @@ func (r *SecretGORMRepository) GetByOwnerRef(param string) (repository pos_model
 	return repository
 }
 
-func (r *SecretGORMRepository) GetByBillID(id uint) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByBillID(id uint) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "bill_id=?", id).Error
 
@@ -258,7 +259,7 @@ func (r *SecretGORMRepository) GetByBillID(id uint) (repository pos_models.Secre
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -283,7 +284,7 @@ func (r *SecretGORMRepository) GetByBillID(id uint) (repository pos_models.Secre
 	}
 	return repository
 }
-func (r *SecretGORMRepository) GetByTaxID(id uint) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByTaxID(id uint) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "tax_id=?", id).Error
 
@@ -293,7 +294,7 @@ func (r *SecretGORMRepository) GetByTaxID(id uint) (repository pos_models.Secret
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -318,7 +319,7 @@ func (r *SecretGORMRepository) GetByTaxID(id uint) (repository pos_models.Secret
 	}
 	return repository
 }
-func (r *SecretGORMRepository) GetBySecretID(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetBySecretID(param string) (repository auth_models.SecretRepositoryResponse) {
 
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "secret_id=?", param).Error
@@ -329,7 +330,7 @@ func (r *SecretGORMRepository) GetBySecretID(param string) (repository pos_model
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -355,7 +356,7 @@ func (r *SecretGORMRepository) GetBySecretID(param string) (repository pos_model
 	return repository
 }
 
-func (r *SecretGORMRepository) GetByClientID(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByClientID(param string) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "client_id=?", param).Error
 
@@ -365,7 +366,7 @@ func (r *SecretGORMRepository) GetByClientID(param string) (repository pos_model
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -390,7 +391,7 @@ func (r *SecretGORMRepository) GetByClientID(param string) (repository pos_model
 	}
 	return repository
 }
-func (r *SecretGORMRepository) GetByToken(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByToken(param string) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "token=?", param).Error
 
@@ -400,7 +401,7 @@ func (r *SecretGORMRepository) GetByToken(param string) (repository pos_models.S
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -425,7 +426,7 @@ func (r *SecretGORMRepository) GetByToken(param string) (repository pos_models.S
 	}
 	return repository
 }
-func (r *SecretGORMRepository) CheckIFExists(id uint) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) CheckIFExists(id uint) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "id=?", id).Error
 
@@ -458,7 +459,7 @@ func (r *SecretGORMRepository) CheckIFExists(id uint) (repository pos_models.Sec
 
 	return repository
 }
-func (r *SecretGORMRepository) GetAll() (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetAll() (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList).Error
 
@@ -468,7 +469,7 @@ func (r *SecretGORMRepository) GetAll() (repository pos_models.SecretRepositoryR
 		repository.Message = "Error"
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -493,7 +494,7 @@ func (r *SecretGORMRepository) GetAll() (repository pos_models.SecretRepositoryR
 	}
 	return repository
 }
-func (r *SecretGORMRepository) Delete(id uint) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) Delete(id uint) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "id=?", id).Error
 
@@ -502,7 +503,7 @@ func (r *SecretGORMRepository) Delete(id uint) (repository pos_models.SecretRepo
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -515,7 +516,7 @@ func (r *SecretGORMRepository) Delete(id uint) (repository pos_models.SecretRepo
 
 		for _, v := range repository.SecretList {
 			v.Stage = "deleted"
-			var dataLog pos_models.Datalog
+			var dataLog data_models.Datalog
 			dataLog.ID = v.ID
 			dataLog.Type = "Secret"
 			dataLog.Stage = "deleted"
@@ -551,7 +552,7 @@ func (r *SecretGORMRepository) Delete(id uint) (repository pos_models.SecretRepo
 	return repository
 }
 
-func (r *SecretGORMRepository) GetByName(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByName(param string) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "name=?", param).Error
 
@@ -560,7 +561,7 @@ func (r *SecretGORMRepository) GetByName(param string) (repository pos_models.Se
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -589,7 +590,7 @@ func (r *SecretGORMRepository) GetByName(param string) (repository pos_models.Se
 	return repository
 }
 
-func (r *SecretGORMRepository) GetByStage(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByStage(param string) (repository auth_models.SecretRepositoryResponse) {
 
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "stage=?", param).Error
@@ -599,7 +600,7 @@ func (r *SecretGORMRepository) GetByStage(param string) (repository pos_models.S
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -627,7 +628,7 @@ func (r *SecretGORMRepository) GetByStage(param string) (repository pos_models.S
 	return repository
 }
 
-func (r *SecretGORMRepository) GetByType(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByType(param string) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "type=?", param).Error
 
@@ -636,7 +637,7 @@ func (r *SecretGORMRepository) GetByType(param string) (repository pos_models.Se
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -663,7 +664,7 @@ func (r *SecretGORMRepository) GetByType(param string) (repository pos_models.Se
 	}
 	return repository
 }
-func (r *SecretGORMRepository) GetByDate(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByDate(param string) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "created_at=?", param).Or(&repository.SecretList, "updated_at=?", param).Or(&repository.SecretList, "deleted_at=?", param).Error
 	if err != nil {
@@ -671,7 +672,7 @@ func (r *SecretGORMRepository) GetByDate(param string) (repository pos_models.Se
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -698,7 +699,7 @@ func (r *SecretGORMRepository) GetByDate(param string) (repository pos_models.Se
 	}
 	return repository
 }
-func (r *SecretGORMRepository) GetByStatus(param int) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByStatus(param int) (repository auth_models.SecretRepositoryResponse) {
 	err := r.GormDB.Find(&repository.SecretList, "status=?", param).Error
 
 	if err != nil {
@@ -706,7 +707,7 @@ func (r *SecretGORMRepository) GetByStatus(param int) (repository pos_models.Sec
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -733,7 +734,7 @@ func (r *SecretGORMRepository) GetByStatus(param int) (repository pos_models.Sec
 	}
 	return repository
 }
-func (r *SecretGORMRepository) GetByEnabled(param int) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByEnabled(param int) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "enabled=?", param).Error
 
@@ -742,7 +743,7 @@ func (r *SecretGORMRepository) GetByEnabled(param int) (repository pos_models.Se
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -769,7 +770,7 @@ func (r *SecretGORMRepository) GetByEnabled(param int) (repository pos_models.Se
 	}
 	return repository
 }
-func (r *SecretGORMRepository) GetByLocate(param string) (repository pos_models.SecretRepositoryResponse) {
+func (r *SecretGORMRepository) GetByLocate(param string) (repository auth_models.SecretRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.SecretList, "locale=?", param).Error
 
@@ -778,7 +779,7 @@ func (r *SecretGORMRepository) GetByLocate(param string) (repository pos_models.
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Secret = nil
-		repository.SecretList = make([]*pos_models.Secret, 0)
+		repository.SecretList = make([]*auth_models.Secret, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode

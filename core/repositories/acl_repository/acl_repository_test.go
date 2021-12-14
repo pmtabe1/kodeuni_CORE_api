@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/jinzhu/gorm"
-	"github.com/paulmsegeya/pos/core/models/auth_models"
-	"github.com/paulmsegeya/pos/core/models/base_models"
+	"github.com/paulmsegeya/subscription/core/models/auth_models"
+	"github.com/paulmsegeya/subscription/core/models/base_models"
 	"github.com/stretchr/testify/require"
 )
 
@@ -32,17 +32,17 @@ func TestAdd(t *testing.T) {
 
 func TestUpdate(t *testing.T) {
 
-	ref := 29372112
+	ref := 29372113
 
 	data := auth_models.Acl{
-		Foundation:   base_models.Foundation{Model: gorm.Model{}, Name: "Acl", Type: "Acl", Stage: "added", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Acl", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
+		Foundation:   base_models.Foundation{Model: gorm.Model{}, Name: "Acl", Type: "Acl", Stage: "--updated", Maker: "maker", Checker: "checker", Approver: "approver", Description: "Acl", Status: "", WorkflowLevels: 0, SyncToken: 0, Version: 0, Enabled: 0, Locale: "", Events: []byte{}},
 		PermissionID: 0,
 	}
 	data.ID = uint(ref)
 	data.Locale = "en"
 
 	got := New().Update(uint(ref), &data)
-	require.NotNilf(t, got.Acl, "Expected non Nil but received %v  instead", got.AclList)
+	require.Equalf(t, got.Acl.Stage,"updated", "Expected to be equal  but received %v  instead", got.Acl.Stage)
 }
 func TestAddOrUpdate(t *testing.T) {
 	ref := 29372115

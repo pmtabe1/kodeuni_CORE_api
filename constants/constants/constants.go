@@ -1,7 +1,7 @@
 package constants
 
 //date formatters
-
+const  AppName="subscription"
 const Golang_date_YYYYMMDD = "2006-01-02"
 const TRA_receipt_date_format = "2006-01-02"
 const TRA_Znum_format = "20060102"

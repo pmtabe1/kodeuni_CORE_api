@@ -6,13 +6,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/paulmsegeya/pos/constants/error_constants"
-	"github.com/paulmsegeya/pos/core/models/auth_models"
-	"github.com/paulmsegeya/pos/core/models/error_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
-	"github.com/paulmsegeya/pos/core/repositories/datalog_repository"
-	"github.com/paulmsegeya/pos/databases/pos_databases"
-	"github.com/paulmsegeya/pos/utils/stacktrace_utils"
+	"github.com/paulmsegeya/subscription/constants/error_constants"
+	"github.com/paulmsegeya/subscription/core/models/auth_models"
+	"github.com/paulmsegeya/subscription/core/models/data_models"
+	"github.com/paulmsegeya/subscription/core/models/error_models"
+	"github.com/paulmsegeya/subscription/core/repositories/datalog_repository"
+	"github.com/paulmsegeya/subscription/databases/app_databases"
+	"github.com/paulmsegeya/subscription/utils/stacktrace_utils"
 	"gorm.io/gorm"
 )
 
@@ -39,7 +39,7 @@ type AclRepository struct {
 func New() *AclRepository {
 
 	return &AclRepository{
-		GormDB: pos_databases.New().DBConnection(),
+		GormDB: app_databases.New().DBConnection(),
 	}
 }
 
@@ -538,7 +538,7 @@ func (r *AclRepository) Delete(id uint) (repository auth_models.AclRepositoryRes
 
 		for _, v := range repository.AclList {
 			v.Stage = "deleted"
-			var dataLog pos_models.Datalog
+			var dataLog data_models.Datalog
 			dataLog.ID = v.ID
 			dataLog.Type = "Acl"
 			dataLog.Stage = "deleted"

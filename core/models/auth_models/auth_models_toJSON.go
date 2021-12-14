@@ -10,6 +10,11 @@ func (model *Signup) ToJSON() string {
 	x := fmt.Sprintf("%v", string(jsonBytes))
 	return x
 }
+func (model *Secret) ToJSON() string {
+	jsonBytes, _ := json.Marshal(model)
+	x := fmt.Sprintf("%v", string(jsonBytes))
+	return x
+}
 
 func (model *SignupRepositoryResponse) ToJSON() string {
 	jsonBytes, _ := json.Marshal(model)

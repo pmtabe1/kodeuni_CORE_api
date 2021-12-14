@@ -1,37 +1,36 @@
 package product_repository
 
-
-
 import (
 	"errors"
 	"log"
 	"net/http"
 	"time"
 
-	"github.com/paulmsegeya/pos/constants/error_constants"
-	"github.com/paulmsegeya/pos/core/models/error_models"
-	"github.com/paulmsegeya/pos/core/models/pos_models"
-	"github.com/paulmsegeya/pos/core/repositories/datalog_repository"
-	"github.com/paulmsegeya/pos/databases/pos_databases"
-	"github.com/paulmsegeya/pos/utils/stacktrace_utils"
+	"github.com/paulmsegeya/subscription/constants/error_constants"
+	"github.com/paulmsegeya/subscription/core/models/data_models"
+	"github.com/paulmsegeya/subscription/core/models/error_models"
+	"github.com/paulmsegeya/subscription/core/models/subscription_models"
+	"github.com/paulmsegeya/subscription/core/repositories/datalog_repository"
+	"github.com/paulmsegeya/subscription/databases/app_databases"
+	"github.com/paulmsegeya/subscription/utils/stacktrace_utils"
 	"gorm.io/gorm"
 )
 
 type IProductRepository interface {
-	Add(data pos_models.Product) (repository pos_models.ProductRepositoryResponse)
-	Update(id uint, date pos_models.Product) (repository pos_models.ProductRepositoryResponse)
-	AddOrUpdate(id int, data pos_models.Product) (repository pos_models.ProductRepositoryResponse)
-	GetByID(id uint) (repository pos_models.ProductRepositoryResponse)
-	GetByName(param string) (repository pos_models.ProductRepositoryResponse)
-	GetByStage(param string) (repository pos_models.ProductRepositoryResponse)
-	GetByType(param string) (repository pos_models.ProductRepositoryResponse)
-	GetByDate(param string) (repository pos_models.ProductRepositoryResponse)
-	GetByStatus(param int) (repository pos_models.ProductRepositoryResponse)
-	GetByEnabled(param int) (repository pos_models.ProductRepositoryResponse)
-	GetByLocale(param string) (repository pos_models.ProductRepositoryResponse)
-	CheckIFExists(id uint) (repository pos_models.ProductRepositoryResponse)
-	GetAll() (repository pos_models.ProductRepositoryResponse)
-	Delete(id uint) (repository pos_models.ProductRepositoryResponse)
+	Add(data subscription_models.Product) (repository subscription_models.ProductRepositoryResponse)
+	Update(id uint, date subscription_models.Product) (repository subscription_models.ProductRepositoryResponse)
+	AddOrUpdate(id int, data subscription_models.Product) (repository subscription_models.ProductRepositoryResponse)
+	GetByID(id uint) (repository subscription_models.ProductRepositoryResponse)
+	GetByName(param string) (repository subscription_models.ProductRepositoryResponse)
+	GetByStage(param string) (repository subscription_models.ProductRepositoryResponse)
+	GetByType(param string) (repository subscription_models.ProductRepositoryResponse)
+	GetByDate(param string) (repository subscription_models.ProductRepositoryResponse)
+	GetByStatus(param int) (repository subscription_models.ProductRepositoryResponse)
+	GetByEnabled(param int) (repository subscription_models.ProductRepositoryResponse)
+	GetByLocale(param string) (repository subscription_models.ProductRepositoryResponse)
+	CheckIFExists(id uint) (repository subscription_models.ProductRepositoryResponse)
+	GetAll() (repository subscription_models.ProductRepositoryResponse)
+	Delete(id uint) (repository subscription_models.ProductRepositoryResponse)
 }
 type ProductRepository struct {
 	GormDB *gorm.DB
@@ -40,11 +39,11 @@ type ProductRepository struct {
 func New() *ProductRepository {
 
 	return &ProductRepository{
-		GormDB: pos_databases.New().DBConnection(),
+		GormDB: app_databases.New().DBConnection(),
 	}
 }
 
-func (r *ProductRepository) Add(data *pos_models.Product) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) Add(data *subscription_models.Product) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	if data == nil {
@@ -54,7 +53,7 @@ func (r *ProductRepository) Add(data *pos_models.Product) (repository pos_models
 		repository.RepositoryStatus = false
 		repository.Product = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -69,7 +68,7 @@ func (r *ProductRepository) Add(data *pos_models.Product) (repository pos_models
 		repository.RepositoryStatus = false
 		repository.Product = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -88,7 +87,7 @@ func (r *ProductRepository) Add(data *pos_models.Product) (repository pos_models
 		repository.RepositoryStatus = false
 		repository.Product = data
 		repository.StatusCode = http.StatusInternalServerError
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -103,7 +102,7 @@ func (r *ProductRepository) Add(data *pos_models.Product) (repository pos_models
 		repository.RepositoryStatus = false
 		repository.Product = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -128,7 +127,7 @@ func (r *ProductRepository) Add(data *pos_models.Product) (repository pos_models
 	}
 	return repository
 }
-func (r *ProductRepository) Update(id uint, data *pos_models.Product) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) Update(id uint, data *subscription_models.Product) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	// Quick Validation
@@ -140,7 +139,7 @@ func (r *ProductRepository) Update(id uint, data *pos_models.Product) (repositor
 		repository.RepositoryStatus = false
 		repository.Product = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -155,7 +154,7 @@ func (r *ProductRepository) Update(id uint, data *pos_models.Product) (repositor
 		repository.RepositoryStatus = false
 		repository.Product = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -169,7 +168,7 @@ func (r *ProductRepository) Update(id uint, data *pos_models.Product) (repositor
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -188,7 +187,7 @@ func (r *ProductRepository) Update(id uint, data *pos_models.Product) (repositor
 		repository.RepositoryStatus = false
 		repository.Product = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -203,7 +202,7 @@ func (r *ProductRepository) Update(id uint, data *pos_models.Product) (repositor
 		repository.RepositoryStatus = false
 		repository.Product = nil
 		repository.StatusCode = http.StatusInternalServerError
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -227,7 +226,7 @@ func (r *ProductRepository) Update(id uint, data *pos_models.Product) (repositor
 	}
 	return repository
 }
-func (r *ProductRepository) AddOrUpdate(id uint, data *pos_models.Product) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) AddOrUpdate(id uint, data *subscription_models.Product) (repository subscription_models.ProductRepositoryResponse) {
 	if r.CheckIFExists(id).RepositoryStatus {
 		return r.Update(id, data)
 	} else {
@@ -235,7 +234,7 @@ func (r *ProductRepository) AddOrUpdate(id uint, data *pos_models.Product) (repo
 	}
 }
 
-func (r *ProductRepository) GetByID(id uint) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByID(id uint) (repository subscription_models.ProductRepositoryResponse) {
 	err := r.GormDB.Find(&repository.ProductList, "id=?", id).Error
 
 	if err != nil {
@@ -244,7 +243,7 @@ func (r *ProductRepository) GetByID(id uint) (repository pos_models.ProductRepos
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -268,7 +267,7 @@ func (r *ProductRepository) GetByID(id uint) (repository pos_models.ProductRepos
 	return repository
 }
 
-func (r *ProductRepository) GetByOwnerRef(param string) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByOwnerRef(param string) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "owner_ref = ?", param).Error
 
@@ -278,7 +277,7 @@ func (r *ProductRepository) GetByOwnerRef(param string) (repository pos_models.P
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -303,7 +302,7 @@ func (r *ProductRepository) GetByOwnerRef(param string) (repository pos_models.P
 	return repository
 }
 
-func (r *ProductRepository) GetByBillID(id uint) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByBillID(id uint) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "bill_id=?", id).Error
 
@@ -313,7 +312,7 @@ func (r *ProductRepository) GetByBillID(id uint) (repository pos_models.ProductR
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -338,7 +337,7 @@ func (r *ProductRepository) GetByBillID(id uint) (repository pos_models.ProductR
 	}
 	return repository
 }
-func (r *ProductRepository) GetByTaxID(id uint) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByTaxID(id uint) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "tax_id=?", id).Error
 
@@ -348,7 +347,7 @@ func (r *ProductRepository) GetByTaxID(id uint) (repository pos_models.ProductRe
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -373,7 +372,7 @@ func (r *ProductRepository) GetByTaxID(id uint) (repository pos_models.ProductRe
 	}
 	return repository
 }
-func (r *ProductRepository) GetByInvoiceID(id uint) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByInvoiceID(id uint) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "invoice_id=?", id).Error
 
@@ -383,7 +382,7 @@ func (r *ProductRepository) GetByInvoiceID(id uint) (repository pos_models.Produ
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -408,7 +407,7 @@ func (r *ProductRepository) GetByInvoiceID(id uint) (repository pos_models.Produ
 	}
 	return repository
 }
-func (r *ProductRepository) GetByReceiptID(id uint) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByReceiptID(id uint) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "receipt_id=?", id).Error
 
@@ -418,7 +417,7 @@ func (r *ProductRepository) GetByReceiptID(id uint) (repository pos_models.Produ
 		repository.RepositoryStatus = false
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -443,7 +442,7 @@ func (r *ProductRepository) GetByReceiptID(id uint) (repository pos_models.Produ
 	}
 	return repository
 }
-func (r *ProductRepository) CheckIFExists(id uint) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) CheckIFExists(id uint) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "id=?", id).Error
 
@@ -475,7 +474,7 @@ func (r *ProductRepository) CheckIFExists(id uint) (repository pos_models.Produc
 
 	return repository
 }
-func (r *ProductRepository) GetAll() (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetAll() (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList).Error
 
@@ -485,7 +484,7 @@ func (r *ProductRepository) GetAll() (repository pos_models.ProductRepositoryRes
 		repository.Message = "Error"
 		repository.StatusCode = http.StatusInternalServerError
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -517,7 +516,7 @@ func (r *ProductRepository) GetAll() (repository pos_models.ProductRepositoryRes
 	}
 	return repository
 }
-func (r *ProductRepository) Delete(id uint) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) Delete(id uint) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "id=?", id).Error
 
@@ -526,7 +525,7 @@ func (r *ProductRepository) Delete(id uint) (repository pos_models.ProductReposi
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -539,7 +538,7 @@ func (r *ProductRepository) Delete(id uint) (repository pos_models.ProductReposi
 
 		for _, v := range repository.ProductList {
 			v.Stage = "deleted"
-			var dataLog pos_models.Datalog
+			var dataLog data_models.Datalog
 			dataLog.ID = v.ID
 			dataLog.Type = "Product"
 			dataLog.Stage = "deleted"
@@ -576,7 +575,7 @@ func (r *ProductRepository) Delete(id uint) (repository pos_models.ProductReposi
 	return repository
 }
 
-func (r *ProductRepository) GetByName(param string) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByName(param string) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "name=?", param).Error
 
@@ -585,7 +584,7 @@ func (r *ProductRepository) GetByName(param string) (repository pos_models.Produ
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -614,7 +613,7 @@ func (r *ProductRepository) GetByName(param string) (repository pos_models.Produ
 	return repository
 }
 
-func (r *ProductRepository) GetByStage(param string) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByStage(param string) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "stage=?", param).Error
 
@@ -623,7 +622,7 @@ func (r *ProductRepository) GetByStage(param string) (repository pos_models.Prod
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -651,7 +650,7 @@ func (r *ProductRepository) GetByStage(param string) (repository pos_models.Prod
 	return repository
 }
 
-func (r *ProductRepository) GetByType(param string) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByType(param string) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "type=?", param).Error
 
@@ -660,7 +659,7 @@ func (r *ProductRepository) GetByType(param string) (repository pos_models.Produ
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -687,7 +686,7 @@ func (r *ProductRepository) GetByType(param string) (repository pos_models.Produ
 	}
 	return repository
 }
-func (r *ProductRepository) GetByDate(param string) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByDate(param string) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	err := r.GormDB.Find(&repository.ProductList, "created_at=?", param).Or(&repository.ProductList, "updated_at=?", param).Or(&repository.ProductList, "deleted_at=?", param).Error
@@ -696,7 +695,7 @@ func (r *ProductRepository) GetByDate(param string) (repository pos_models.Produ
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -723,7 +722,7 @@ func (r *ProductRepository) GetByDate(param string) (repository pos_models.Produ
 	}
 	return repository
 }
-func (r *ProductRepository) GetByStatus(param int) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByStatus(param int) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "status=?", param).Error
 
@@ -732,7 +731,7 @@ func (r *ProductRepository) GetByStatus(param int) (repository pos_models.Produc
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -763,7 +762,7 @@ func (r *ProductRepository) GetByStatus(param int) (repository pos_models.Produc
 	}
 	return repository
 }
-func (r *ProductRepository) GetByEnabled(param int) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByEnabled(param int) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 
 	err := r.GormDB.Find(&repository.ProductList, "enabled=?", param).Error
@@ -773,7 +772,7 @@ func (r *ProductRepository) GetByEnabled(param int) (repository pos_models.Produ
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
@@ -800,7 +799,7 @@ func (r *ProductRepository) GetByEnabled(param int) (repository pos_models.Produ
 	}
 	return repository
 }
-func (r *ProductRepository) GetByLocate(param string) (repository pos_models.ProductRepositoryResponse) {
+func (r *ProductRepository) GetByLocate(param string) (repository subscription_models.ProductRepositoryResponse) {
 	repository.RepositoryErrorResponse = new(error_models.ErrorModel)
 	err := r.GormDB.Find(&repository.ProductList, "locale=?", param).Error
 
@@ -809,7 +808,7 @@ func (r *ProductRepository) GetByLocate(param string) (repository pos_models.Pro
 		repository.Message = "Error"
 		repository.RepositoryStatus = false
 		repository.Product = nil
-		repository.ProductList = make([]*pos_models.Product, 0)
+		repository.ProductList = make([]*subscription_models.Product, 0)
 		repository.RepositoryErrorResponse.ErrorMessage = repository.Message
 		repository.RepositoryErrorResponse.ErrorStackTrace = stacktrace_utils.GenerateStackstraceWithMessageCapture(errors.New(repository.Error))
 		repository.RepositoryErrorResponse.ErrorStatusCode = repository.StatusCode
